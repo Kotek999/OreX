@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { Text } from "react-native-magnus";
 import { JSX } from "../types";
 
 export default function Welcome(): JSX {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>HOME SCREEN</Text>
+      <Text fontSize="xl">HOME SCREEN</Text>
     </View>
   );
 }
