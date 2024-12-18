@@ -26,6 +26,9 @@ yarn-error.*
 .DS_Store
 *.pem
 
+# keys
+apiKeys.json
+
 # local env files
 .env*.local
 
