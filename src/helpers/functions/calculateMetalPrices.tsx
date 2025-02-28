@@ -7,15 +7,16 @@ import {
   JSX,
   MetalRates,
   OutputProp,
-  Fields,
+  Field,
 } from "../../types";
 
 export const calculateMetalPrices = (
   props: CalculateMetalPricesProps<InputsType>
 ): JSX | undefined => {
-  const errorMessage: string = "To pole jest wymagane!";
+  const emptyErrorMessage: string = "To pole jest wymagane!";
+  const zeroErrorMessage: string = "To pole nie może zawierać liczby 0!";
 
-  const fields: Fields = [
+  const fields: Field[] = [
     {
       field: props.inputs.inputOne,
       setError: props.setErrorMessages.setEmptyFieldError,
@@ -26,9 +27,7 @@ export const calculateMetalPrices = (
     },
   ];
 
-  if (!validateFields(fields, errorMessage)) {
-    return;
-  }
+  if (!validateFields(fields, emptyErrorMessage, zeroErrorMessage)) return;
 
   props.metalModal.onPressOpenModal(0);
 

@@ -2,15 +2,19 @@ import { Fields } from "../../types";
 
 export const validateFields = (
   fields: Fields,
-  errorMessage: string
+  emptyMsg: string,
+  zeroMsg: string
 ): boolean => {
-  for (const { field, setError } of fields) {
-    if (field === "") {
-      setError(errorMessage);
-      return false;
-    } else {
-      setError(null);
+  return (Array.isArray(fields) ? fields : [fields]).every(
+    ({ field, setError }) => {
+      const error =
+        field.trim() === ""
+          ? emptyMsg
+          : parseFloat(field) === 0
+          ? zeroMsg
+          : null;
+      setError(error);
+      return !error;
     }
-  }
-  return true;
+  );
 };

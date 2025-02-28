@@ -1,3 +1,4 @@
+import React from "react";
 import { Text } from "react-native-magnus";
 import { formatNumber } from "./formatNumber";
 import { JSX, currenciesMap } from "../../types";

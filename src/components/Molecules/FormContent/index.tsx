@@ -7,6 +7,7 @@ import { FormInputFields } from "../../Atoms/FormInputFields";
 import { CurrencyPicker } from "../../Atoms/CurrencyPicker";
 import { JSX, NullableString, FormContentProps } from "../../../types";
 import { currencySymbols } from "../../../helpers/data/currencySymbols";
+import { screenWidth } from "../../../helpers/dimensions";
 
 export const FormContent = (props: FormContentProps): JSX => {
   const [emptyGoldFieldError, setEmptyGoldFieldError] =
@@ -16,7 +17,7 @@ export const FormContent = (props: FormContentProps): JSX => {
 
   return (
     <View alignItems="center" justifyContent="center">
-      <FormHeader {...props} />
+      <FormHeader w={screenWidth - 50} {...props} />
       <ScrollViewContainer>
         <FormInputFields
           valueOne={props.inputs.inputOne}

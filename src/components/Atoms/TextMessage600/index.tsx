@@ -6,7 +6,7 @@ export const TextMessage600 = (props: TextMessageProps): JSX => {
   return (
     <Text
       color={props.color}
-      fontSize={14}
+      fontSize={props.fontSize}
       fontWeight={props.fontWeight}
       letterSpacing={0.8}
     >

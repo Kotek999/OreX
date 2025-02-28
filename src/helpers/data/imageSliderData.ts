@@ -1,31 +1,43 @@
-import { ImageSourcePropType } from "react-native";
-import { goldBars, silverBars, test } from "../imageRequirements";
+import {
+  goldBg,
+  silverBg,
+  test,
+  goldBarsIcon,
+  silverBarsIcon,
+  flagOfEuropeIcon,
+  flagOfPolandIcon,
+} from "../imageRequirements";
 import { ImageSliderData } from "../../types";
 
 export const imageSliderData: ImageSliderData[] = [
   {
     title: "Złoto",
-    image: goldBars,
-    description: "dkwkdwokdk0202ik0e202eie2",
+    image: goldBg,
+    flag: goldBarsIcon,
+    description: "Kliknij, aby przeliczyć...",
   },
   {
     title: "Srebro",
-    image: silverBars,
-    description: "202ik0e202eie2",
+    image: silverBg,
+    flag: silverBarsIcon,
+    description: "Kliknij, aby przeliczyć...",
   },
   {
     title: "Polskie Złote",
-    image: silverBars,
-    description: "k0e202eie2",
+    image: silverBg,
+    flag: flagOfPolandIcon,
+    description: "Kliknij, aby przeliczyć...",
   },
   {
     title: "Euro",
     image: test,
-    description: "k0e202eie2",
+    flag: flagOfEuropeIcon,
+    description: "Kliknij, aby przeliczyć...",
   },
   {
     title: "Dolary",
-    image: silverBars,
-    description: "k0e202eie2",
+    image: silverBg,
+    flag: flagOfEuropeIcon,
+    description: "Kliknij, aby przeliczyć...",
   },
 ];

@@ -6,13 +6,12 @@ import { JSX, InputFieldProps, NullableString } from "../../../types";
 
 export const InputField = (props: InputFieldProps): JSX => {
   const onChangeTextInputState = (text: string) => {
-    const inputState = changeTextInput(
-      text,
-      props.inputType,
-      props.onChangeText,
-      props.inputs,
-      props.setInputs
-    );
+    const inputState = changeTextInput(text, {
+      name: props.inputType,
+      onChangeText: props.onChangeText,
+      inputs: props.inputs,
+      setInputs: props.setInputs,
+    });
     return inputState;
   };
 

@@ -1,12 +1,7 @@
 import React from "react";
 import Animated from "react-native-reanimated";
 import { Div as View } from "react-native-magnus";
-import { JSX, ImageSliderData } from "../../../types";
-
-type PaginationItemProps = {
-  items: ImageSliderData[];
-  paginationIndex: number;
-};
+import { JSX, PaginationItemProps } from "../../../types";
 
 export const PaginationItem = (props: PaginationItemProps): JSX => {
   return (
@@ -18,7 +13,7 @@ export const PaginationItem = (props: PaginationItemProps): JSX => {
             style={[
               {
                 backgroundColor:
-                  props.paginationIndex === index ? "lime" : "#aaa",
+                  props.paginationIndex === index ? "#10b981" : "#aaa",
                 height: 8,
                 width: 8,
                 marginHorizontal: 2,

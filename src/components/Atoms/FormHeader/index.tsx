@@ -1,12 +1,11 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Div as View, Text, Icon } from "react-native-magnus";
-import { screenWidth } from "../../../helpers/dimensions";
 import { JSX, FormHeaderProps } from "../../../types";
 
 export const FormHeader = (props: FormHeaderProps): JSX => {
   return (
-    <View w={screenWidth - 50}>
+    <View w={props.w}>
       <View
         p={10}
         flexDir="row"

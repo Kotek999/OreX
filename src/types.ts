@@ -6,13 +6,16 @@ import {
   RefObject,
   ForwardRefExoticComponent,
   RefAttributes,
+  MutableRefObject,
 } from "react";
 import {
   StyleProp,
   ViewStyle,
+  ViewToken,
   Animated as AnimatedStyle,
   ImageSourcePropType,
 } from "react-native";
+import { ScrollHandlerProcessed } from "react-native-reanimated";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { iconFontFamilyType } from "react-native-magnus/lib/typescript/src/ui/icon/icon.type";
@@ -182,12 +185,17 @@ export type ChangeInputStateProps = (
   setInputs: (value: SetStateAction<InputsType>) => void
 ) => void;
 
+export type TextInputOptionsProps = {
+  name?: keyof InputsType;
+  onChangeText?: ChangeInputStateProps;
+  inputs?: InputsType;
+  setInputs?: SetState<InputsType>;
+  setSingleInput?: (value: string) => void;
+};
+
 export type ChangeTextInputProps = (
-  val: string,
-  name: keyof InputsType,
-  onChangeText: ChangeInputStateProps,
-  inputs: InputsType,
-  setInputs: SetState<InputsType>
+  text: string,
+  options?: TextInputOptionsProps
 ) => void;
 
 export type CalculateProfitOrLossProps = {
@@ -322,6 +330,7 @@ export type FormInputFieldsProps = {
 export type FormHeaderProps = {
   formModal: ModalProps;
   headerTitle: string;
+  w?: string | number | undefined;
 };
 
 export type ErrorMessageProps = {
@@ -434,10 +443,12 @@ export type Color = "#4ade80" | "#fb7185" | "#f8fafc";
 export type Message = "plus" | "minus" | "N/A";
 export type Result = "zyskać" | "stracić";
 
-export type Fields = {
+export type Field = {
   field: string;
-  setError: SetState<string | null>;
-}[];
+  setError: (msg: string | null) => void;
+};
+
+export type Fields = Field | Field[];
 
 export type TextMessageProps = ChildProps & {
   color: string;
@@ -453,6 +464,7 @@ export type TextMessageProps = ChildProps & {
     | "700"
     | "800"
     | "900";
+  fontSize?: string | number | undefined;
 };
 
 export type InputDataProps = {
@@ -523,5 +535,68 @@ export type NullableNumber = number | null;
 export type ImageSliderData = {
   title: string;
   image: ImageSourcePropType;
+  flag: ImageSourcePropType;
   description: string;
+};
+
+export type SliderItemProps = {
+  item: ImageSliderData;
+  paginationIndex: number;
+  onPressSelectIndex: (buttonId: number) => void;
+};
+
+export type PaginationItemProps = {
+  items: ImageSliderData[];
+  paginationIndex: number;
+};
+
+export type InputStateActionProp = (
+  name: keyof InputsType,
+  text: string
+) => void;
+
+export type SliderProps = {
+  itemList: ImageSliderData[];
+  setSelectedIndex: SetState<NullableNumber>;
+  formModal: ModalProps;
+};
+
+export type ScrollHandlerProp = ScrollHandlerProcessed<Record<string, unknown>>;
+export type ViewableItemsChangedProps = ({
+  viewableItems,
+}: {
+  viewableItems: ViewToken[];
+}) => void;
+
+export type ItemVisiblePercentThresholdProp = {
+  itemVisiblePercentThreshold: number;
+};
+
+export type CurrentViewabilityConfigCallbackPairsProps = {
+  viewabilityConfig: ItemVisiblePercentThresholdProp;
+  onViewableItemsChanged: ViewableItemsChangedProps;
+}[];
+
+export type ViewabilityConfigCallbackPairsProps =
+  MutableRefObject<CurrentViewabilityConfigCallbackPairsProps>;
+
+export type UseEndReachedDataProps = {
+  itemList: ImageSliderData[];
+};
+export type EndReachedDataProps = {
+  data: ImageSliderData[];
+  onEndReached: OnPress;
+};
+
+export type RenderItemProp = ({ item }: { item: ImageSliderData }) => JSX;
+
+export type FlatlistItemsConfigProps = EndReachedDataProps & {
+  paginationIndex: number;
+  renderItem: RenderItemProp;
+  onScroll: ScrollHandlerProp;
+  currentViewabilityConfigCallbackPairs: CurrentViewabilityConfigCallbackPairsProps;
+};
+
+export type UseRenderItemProps = SliderProps & {
+  paginationIndex: number;
 };
