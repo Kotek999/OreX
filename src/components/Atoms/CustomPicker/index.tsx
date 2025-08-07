@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Div as View } from "react-native-magnus";
 import { Picker } from "@react-native-picker/picker";
-import { currencySymbols } from "../../../helpers/data/currencySymbols";
+import { currencySymbols } from "../../../helpers/data/currencyData";
 import { JSX, CustomPickerProps } from "../../../types";
 
 export const CustomPicker = (props: CustomPickerProps): JSX => {

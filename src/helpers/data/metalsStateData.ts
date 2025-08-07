@@ -4,7 +4,13 @@ import {
   OutputRateProps,
   MarketRateProp,
   OutputDataProp,
+  InputsStateProps,
 } from "../../types";
+
+const inputsState: InputsStateProps = {
+  inputOne: "",
+  inputTwo: "",
+};
 
 const marketRateData: MarketRateProps = {
   gold: { pricePerGram: 0, pricePerOunce: 0 },
@@ -20,4 +26,4 @@ const metalMarketData: MarketRateProp = createMarketData(marketRateData);
 
 const metalOutputData: OutputDataProp = createMarketData(outputRateData);
 
-export { metalMarketData, metalOutputData };
+export { metalMarketData, metalOutputData, inputsState };

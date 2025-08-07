@@ -26,12 +26,6 @@ export const calculateProfitOrLoss = (
       ? props.marketRates[props.selectedCurrencyTo].gold.pricePerGram
       : props.marketRates[props.selectedCurrencyTo].silver.pricePerGram;
 
-  // if (!marketRate) {
-  //   throw new Error(
-  //     `Missing market rate for ${props.metalType} in ${props.selectedCurrencyTo}`
-  //   );
-  // }
-
   const marketValue: number = props.grams * marketRate;
   const userValue: number = props.grams * userPriceInSelectedCurrency;
 

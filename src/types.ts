@@ -15,12 +15,14 @@ import {
   Animated as AnimatedStyle,
   ImageSourcePropType,
 } from "react-native";
+import { lineDataItem } from "react-native-gifted-charts";
 import { ScrollHandlerProcessed } from "react-native-reanimated";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { BottomSheetModalMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { iconFontFamilyType } from "react-native-magnus/lib/typescript/src/ui/icon/icon.type";
 
 export type JSX = JSX.Element;
+export type ReactNodeLike = string | JSX;
 export type Dimension = "window" | "screen";
 export type SetState<T> = Dispatch<SetStateAction<T>>;
 export type Children = ReactNode;
@@ -30,18 +32,23 @@ export type ChildProps = {
   children: Children;
 };
 
+export type RefProp<T> = RefObject<T>;
+export type MutableRefProp<T> = MutableRefObject<T>;
 export type ActionCallbackFunctionProps = (...args: any[]) => void;
+export type NullableString = string | null;
+
+type Optional<T> = T | undefined;
 
 export type BottomModalRef = BottomSheetModal;
 
 export type ModalProps = {
-  bottomSheetModalRef: RefObject<BottomSheetModalMethods>;
+  bottomSheetModalRef: RefProp<BottomSheetModalMethods>;
   onPressOpenModal: ActionCallbackFunctionProps;
   onPressCloseModal: OnPress;
 };
 
 export type BottomModalProps = ChildProps & {
-  enableContentPanningGesture?: boolean | undefined;
+  enableContentPanningGesture?: Optional<boolean>;
   snapPointsValue: string | number;
   onPressCloseModal: OnPress;
   isTitleExist?: boolean;
@@ -110,36 +117,38 @@ type InputOptions<T> = {
   setOutput: SetState<OutputProp>;
 };
 
+type SelectedCurrencyProps = {
+  selectedCurrencyFrom: string;
+  selectedCurrencyTo: string;
+};
+
+type SetSelectedCurrencyProps = {
+  setSelectedCurrencyFrom: SetState<string>;
+  setSelectedCurrencyTo: SetState<string>;
+};
+
 export type MetalProps<InputsType> = InputOptions<InputsType> & {
+  id?: number;
   metalType: MetalType;
   headerTitle: string;
   loading: boolean;
   output: OutputProp;
   setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
+  onChangeText: ChangeInputStateProps;
 };
 
-type CurrencyValuesProps = {
-  marketRate: {
-    [key: string]: { gold: MetalRate; silver: MetalRate };
+type CurrencyValuesProps = SelectedCurrencyProps &
+  SetSelectedCurrencyProps & {
+    marketRate: MarketRateProp;
+    apiDate: NullableString;
+    metalModal: ModalProps;
+    formModal: ModalProps;
   };
-  apiDate: string | null;
-  selectedCurrencyFrom: string;
-  setSelectedCurrencyFrom: SetState<string>;
-  selectedCurrencyTo: string;
-  setSelectedCurrencyTo: SetState<string>;
-  metalModal: ModalProps;
-  formModal: ModalProps;
-};
 
 type ErrorMessagesState = {
   setErrorMessages: {
-    setEmptyFieldError: SetState<string | null>;
-    setEmptyPriceFieldError: SetState<string | null>;
+    setEmptyFieldError: SetState<NullableString>;
+    setEmptyPriceFieldError: SetState<NullableString>;
   };
 };
 
@@ -164,25 +173,27 @@ export type CalculatedMetalPriceProps<InputsType> =
     inputs: InputsType;
   };
 
-export type currenciesMap = {
+export type CurrenciesMap = {
   gram: [string, string, string];
   euro: [string, string, string];
   złoty: [string, string, string];
   dolary: [string, string, string];
 };
 
+type MarketRatesProp = Record<string, { gold: MetalRate; silver: MetalRate }>;
+
 export type ConvertCurrencyProps = {
   grams: number;
   fromCurrency: string;
   toCurrency: string;
   metalType: MetalType;
-  marketRates: Record<string, { gold: MetalRate; silver: MetalRate }>;
+  marketRates: MarketRatesProp;
 };
 
 export type ChangeInputStateProps = (
   name: keyof InputsType,
   text: string,
-  setInputs: (value: SetStateAction<InputsType>) => void
+  setInputs: SetState<InputsType>
 ) => void;
 
 export type TextInputOptionsProps = {
@@ -198,73 +209,34 @@ export type ChangeTextInputProps = (
   options?: TextInputOptionsProps
 ) => void;
 
-export type CalculateProfitOrLossProps = {
+export type CalculateProfitOrLossProps = SelectedCurrencyProps & {
   grams: number;
   userPrice: number;
   metalType: MetalType;
-  marketRates: Record<string, { gold: MetalRate; silver: MetalRate }>;
-  selectedCurrencyFrom: string;
-  selectedCurrencyTo: string;
+  marketRates: MarketRatesProp;
 };
 
-export type RenderMetalPriceScreenProps = {
-  headerTitle: string;
-  metalType: MetalType;
-  rates: Record<string, CurrencyRates> | null;
-  inputs: InputsType;
-  setLoading: SetState<boolean>;
-  setOutput: SetState<OutputProp>;
-  loading: boolean;
-  output: OutputProp;
-  setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
-  marketRate: {
-    [key: string]: {
-      gold: MetalRate;
-      silver: MetalRate;
-    };
+export type FormContentProps = SelectedCurrencyProps &
+  SetSelectedCurrencyProps & {
+    metalType: MetalType;
+    formModal: ModalProps;
+    metalModal: ModalProps;
+    headerTitle: string;
+    inputs: InputsType;
+    setInputs: SetState<InputsType>;
+    onChangeText: ChangeInputStateProps;
+    rates: Record<string, CurrencyRates> | null;
+    setLoading: SetState<boolean>;
+    setOutput: SetState<OutputProp>;
   };
-  apiDate: string | null;
-  selectedCurrencyFrom: string;
-  setSelectedCurrencyFrom: SetState<string>;
-  selectedCurrencyTo: string;
-  setSelectedCurrencyTo: SetState<string>;
-  formModal: ModalProps;
-  metalModal: ModalProps;
+
+export type SelectedCurrenciesWithDateProps = SelectedCurrencyProps & {
+  apiDate: NullableString;
 };
 
-export type NullableString = string | null;
-
-export type FormContentProps = {
-  metalType: MetalType;
-  formModal: ModalProps;
-  metalModal: ModalProps;
-  headerTitle: string;
-  inputs: InputsType;
-  setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
-  selectedCurrencyFrom: string;
-  setSelectedCurrencyFrom: SetState<string>;
-  selectedCurrencyTo: string;
-  setSelectedCurrencyTo: SetState<string>;
-  rates: Record<string, CurrencyRates> | null;
-  setLoading: SetState<boolean>;
-  setOutput: SetState<Record<string, OptionalMetalType>>;
-};
-
-export type SelectedCurrenciesWithDateProps = {
-  apiDate: string | null;
-  selectedCurrencyFrom: string;
-  selectedCurrencyTo: string;
-};
+export type RenderMetalPriceScreenProps = SelectedCurrenciesWithDateProps &
+  SetSelectedCurrencyProps &
+  FormContentProps;
 
 export type MetalMarketRate = {
   [key: string]: {
@@ -278,15 +250,12 @@ export type MarketRates = Record<
   Record<MetalType, { pricePerGram: number; pricePerOunce: number }>
 >;
 
-export type ProfitOrLossResultProps = {
-  metalType: MetalType;
-  inputs: InputsType;
-  marketRate: MetalMarketRate;
-  selectedCurrencyFrom: string;
-  setSelectedCurrencyFrom: SetState<string>;
-  selectedCurrencyTo: string;
-  setSelectedCurrencyTo: SetState<string>;
-};
+export type ProfitOrLossResultProps = SelectedCurrencyProps &
+  SetSelectedCurrencyProps & {
+    metalType: MetalType;
+    inputs: InputsType;
+    marketRate: MetalMarketRate;
+  };
 
 export type MetalPriceHeaderProps = {
   metalModal: ModalProps;
@@ -301,16 +270,12 @@ export type InputFieldProps = {
   emptyGoldFieldError: NullableString;
   inputs: InputsType;
   setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
+  onChangeText: ChangeInputStateProps;
   inputTitle: string;
   iconName: string;
   inputType: keyof InputsType;
-  iconType: iconFontFamilyType | undefined;
-  value: string | undefined;
+  iconType: Optional<iconFontFamilyType>;
+  value: Optional<string>;
 };
 
 export type FormInputFieldsProps = {
@@ -318,31 +283,23 @@ export type FormInputFieldsProps = {
   emptyPriceGoldFieldError: NullableString;
   inputs: InputsType;
   setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
-  valueOne: string | undefined;
-  valueTwo: string | undefined;
+  onChangeText: ChangeInputStateProps;
+  valueOne: Optional<string>;
+  valueTwo: Optional<string>;
 };
 
 export type FormHeaderProps = {
   formModal: ModalProps;
   headerTitle: string;
-  w?: string | number | undefined;
+  w?: Optional<string | number>;
 };
 
 export type ErrorMessageProps = {
   emptyFieldError: NullableString;
 };
 
-export type CurrencyPickerProps = {
-  selectedCurrencyFrom: string;
-  setSelectedCurrencyFrom: SetState<string>;
-  selectedCurrencyTo: string;
-  setSelectedCurrencyTo: SetState<string>;
-};
+export type CurrencyPickerProps = SelectedCurrencyProps &
+  SetSelectedCurrencyProps;
 
 export type CurrencyImageWithSubtitleProps = {
   selectedCurrencyTo: string;
@@ -354,62 +311,37 @@ export type UnitData = {
   screenWidthDividedValue: number;
 }[];
 
-export type UnitBoxProps = {
+type MetalPriceValues = {
   metalType: MetalType;
   inputs: InputsType;
   output: OutputProp;
-  marketRate: {
-    [key: string]: {
-      gold: MetalRate;
-      silver: MetalRate;
-    };
-  };
   selectedCurrencyTo: string;
+  marketRate: MarketRateProp;
+};
+
+export type UnitBoxProps = MetalPriceValues & {
   title: string;
   priceType: string;
   screenWidthDividedValue: number;
 };
 
-export type GlassUnitCardsProps = {
-  metalType: MetalType;
-  inputs: InputsType;
-  output: OutputProp;
-  marketRate: {
-    [key: string]: {
-      gold: MetalRate;
-      silver: MetalRate;
-    };
-  };
-  selectedCurrencyTo: string;
-};
+export type GlassUnitCardsProps = MetalPriceValues;
 
-export type MetalPriceContentProps = {
-  metalType: MetalType;
-  rates: Record<string, CurrencyRates> | null;
-  inputs: InputsType;
-  setLoading: SetState<boolean>;
-  setOutput: SetState<OutputProp>;
-  loading: boolean;
-  output: OutputProp;
-  setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
-  marketRate: {
-    [key: string]: {
-      gold: MetalRate;
-      silver: MetalRate;
-    };
+export type MetalPriceContentProps = SelectedCurrencyProps &
+  SetSelectedCurrencyProps & {
+    metalType: MetalType;
+    rates: Record<string, CurrencyRates> | null;
+    inputs: InputsType;
+    setLoading: SetState<boolean>;
+    setOutput: SetState<OutputProp>;
+    loading: boolean;
+    output: OutputProp;
+    setInputs: SetState<InputsType>;
+    onChangeText: ChangeInputStateProps;
+    marketRate: MarketRateProp;
+    apiDate: NullableString;
+    formModal: ModalProps;
   };
-  apiDate: string | null;
-  selectedCurrencyFrom: string;
-  setSelectedCurrencyFrom: SetState<string>;
-  selectedCurrencyTo: string;
-  setSelectedCurrencyTo: SetState<string>;
-  formModal: ModalProps;
-};
 
 export type MetalPriceProps = {
   metalType: MetalType;
@@ -419,8 +351,8 @@ export type MetalPriceProps = {
   selectedCurrencyTo: string;
 };
 
-export type NullableImageSource = ImageSourcePropType | undefined;
-export type NullableCurrencySymbol = "€" | "$" | "ZŁ" | undefined;
+export type NullableImageSource = Optional<ImageSourcePropType>;
+export type NullableCurrencySymbol = Optional<"€" | "$" | "ZŁ">;
 
 export type MonthsData = {
   polish: string;
@@ -428,10 +360,6 @@ export type MonthsData = {
 };
 
 export type MonthsWithPolishNamesProp = Record<string, MonthsData>;
-
-export type TextResultProps = ChildProps & {
-  color: string;
-};
 
 export type ResultMessageWithValueProps = {
   valueToFormat: string | number;
@@ -445,16 +373,15 @@ export type Result = "zyskać" | "stracić";
 
 export type Field = {
   field: string;
-  setError: (msg: string | null) => void;
+  setError: (msg: NullableString) => void;
 };
 
 export type Fields = Field | Field[];
 
-export type TextMessageProps = ChildProps & {
-  color: string;
+export type TextCurrencyProps = ChildProps & {
   fontWeight?:
-    | "bold"
     | "normal"
+    | "bold"
     | "100"
     | "200"
     | "300"
@@ -464,7 +391,11 @@ export type TextMessageProps = ChildProps & {
     | "700"
     | "800"
     | "900";
-  fontSize?: string | number | undefined;
+};
+
+export type TextMessageProps = TextCurrencyProps & {
+  color: string;
+  fontSize?: Optional<string | number>;
 };
 
 export type InputDataProps = {
@@ -472,13 +403,9 @@ export type InputDataProps = {
   emptyPriceGoldFieldError: NullableString;
   inputs: InputsType;
   setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
-  valueOne: string | undefined;
-  valueTwo: string | undefined;
+  onChangeText: ChangeInputStateProps;
+  valueOne: Optional<string>;
+  valueTwo: Optional<string>;
 };
 
 export type InputDataWithTextValuesProps = {
@@ -486,14 +413,10 @@ export type InputDataWithTextValuesProps = {
   inputType: string;
   iconName: string;
   iconType: string;
-  value: string | undefined;
+  value: Optional<string>;
   inputs: InputsType;
   setInputs: SetState<InputsType>;
-  onChangeText: (
-    name: keyof InputsType,
-    text: string,
-    setInputs: SetState<InputsType>
-  ) => void;
+  onChangeText: ChangeInputStateProps;
   emptyGoldFieldError: NullableString;
   emptyFieldError: NullableString;
 }[];
@@ -502,10 +425,6 @@ export type CustomPickerProps = {
   alignItems?: "flex-end" | "flex-start" | "center" | "stretch" | "baseline";
   selectedValue: string;
   setValue: (value: SetStateAction<string>) => void;
-};
-
-export type TextMessageLargeProps = ChildProps & {
-  color: string;
 };
 
 export type SubmitButtonProps = {
@@ -599,4 +518,378 @@ export type FlatlistItemsConfigProps = EndReachedDataProps & {
 
 export type UseRenderItemProps = SliderProps & {
   paginationIndex: number;
+};
+
+type SpacingProps = {
+  [K in `m${"t" | "b" | "l" | "r"}`]?: number | string;
+};
+
+export type TextProps = SpacingProps &
+  ChildProps & {
+    color?: string;
+    mt?: string;
+  };
+
+export type SectionProps = TextProps & {
+  title: string;
+};
+
+export type OptionsDataProps = {
+  headerTitle: string;
+  fontFamily: "MaterialIcons" | "Entypo";
+  iconName: string;
+  iconColor: string;
+  content: JSX;
+};
+
+export type TextsProps = {
+  option1: {
+    main: string;
+    title: string;
+    description: string;
+  };
+  option2: {
+    firstTitle: string;
+    firstText: string;
+    secondTitle: string;
+    secondText: string;
+  };
+  option3: {
+    main: string;
+  };
+};
+
+export type OptionProps = ChildProps & {
+  fontFamily: "Entypo" | "MaterialIcons";
+  iconName: string;
+  iconColor: string;
+  headerTitle: string;
+};
+
+export type Currency = "USD" | "EUR" | "PLN";
+
+export type TrendInfo = {
+  changePercent: number;
+  direction: "up" | "down" | "neutral";
+  color: string;
+};
+
+export type ChartDetailsProps = {
+  chartData1: Optional<lineDataItem[]>;
+  chartData2: Optional<lineDataItem[]>;
+};
+
+type ExchangeRatesProp = Record<string, Record<string, RateEntry>> | null;
+
+export type CurrencyConverterProps = ChartDetailsProps & {
+  exchangeRates: ExchangeRatesProp;
+  loadingScreenData: boolean;
+  error: string | null;
+  formModal: ModalProps;
+  headerTitle: string;
+  targetCurrency: Currency;
+  firstCurrency: Currency;
+  secondCurrency: Currency;
+  thirdCurrency: Currency;
+  firstCurrencyName: string;
+  secondCurrencyName: string;
+  trends: Trends;
+};
+
+export type RateEntry = {
+  base: string;
+  date: string;
+  rates: { targetCurrency: number };
+};
+
+export type ExchangeRates = {
+  rates: Record<string, number>;
+  base: string;
+  date: string;
+};
+
+export type CombinedExchangeRates = Record<string, Record<string, RateEntry>>;
+
+export type Averages = Record<string, number>;
+
+export type HistoricalRates = {
+  [base in Currency]?: {
+    [date: string]: Averages;
+  };
+};
+
+type HistoricalRatesProp = {
+  [date: string]: Record<string, number>;
+};
+
+export type HistoricalDataResponse = {
+  rates: HistoricalRatesProp;
+  base: string;
+  start_date: string;
+  end_date: string;
+};
+
+export type CombinedRates = {
+  [date: string]: {
+    EUR: { USD: number; PLN: number };
+    USD: { EUR: number; PLN: number };
+    PLN: { EUR: number; USD: number };
+  };
+};
+
+export type Trend = Record<string, { symbol: string; color: string }>;
+
+export type Trends = Record<
+  Currency,
+  Record<Currency, { symbol: string; color: string }>
+> | null;
+
+export type TrendsResult = Record<
+  Currency,
+  Record<
+    string,
+    {
+      symbol: string;
+      color: string;
+    }
+  >
+>;
+
+export type TrendProp = Record<Currency, Trend>;
+
+export type CombinedRatesValues =
+  | {
+      USD: number;
+      PLN: number;
+    }
+  | {
+      EUR: number;
+      PLN: number;
+    }
+  | {
+      EUR: number;
+      USD: number;
+    };
+
+type LabelText = {
+  color: string;
+  width: number;
+};
+
+export type ItemType = {
+  value?: number;
+  labelTextStyle?: LabelText;
+  labelComponent: Function;
+  label: String;
+};
+
+export type ConvertValuesProps = {
+  exchangeRates: ExchangeRatesProp;
+  targetCurrency: Currency;
+};
+
+type AsyncCallback = () => Promise<void>;
+
+export type UseFetchedMetalRatesProps = {
+  rates: RatesProp;
+  errorMessage: NullableString;
+  apiDate: NullableString;
+  marketRate: MarketRateProp;
+  loadingData: boolean;
+  getMetalRates: AsyncCallback;
+};
+
+export type UseFetchedCurrencyRatesProps = {
+  loadingScreenData: boolean;
+  error: NullableString;
+  exchangeRates: CombinedExchangeRates | null;
+  historicalRates: HistoricalRates;
+  trends: Trends;
+  getExchangeRates: AsyncCallback;
+  getHistoricalRates: AsyncCallback;
+};
+
+type CurrencyNamesProps = {
+  firstCurrencyName: string;
+  secondCurrencyName: string;
+  firstCurrency: Currency;
+  secondCurrency: Currency;
+};
+
+export type CurrencyConverterScreenProps = ChartDetailsProps &
+  CurrencyNamesProps & {
+    headerTitle: string;
+    targetCurrency: Currency;
+    thirdCurrency: Currency;
+  };
+
+export type CurrencyConverterModalProps = {
+  formModal: ModalProps;
+  loadingScreenData: boolean;
+  error: NullableString;
+  exchangeRates: CombinedExchangeRates | null;
+  trends: Trends;
+};
+
+export type ModalContentMapProp = { [key: number]: JSX };
+
+export type MetalRatesProps = {
+  metalRates: UseFetchedMetalRatesProps;
+  formModal: ModalProps;
+};
+
+export type InputsStateProps = {
+  inputOne: string;
+  inputTwo: string;
+};
+
+export type UseCurrencyRatesProps = {
+  currencyRates: UseFetchedCurrencyRatesProps;
+  formModal: ModalProps;
+};
+
+export type ItemProp = {
+  createCurrencyConverterScreen: (props: CurrencyConverterScreenProps) => JSX;
+};
+
+type ChartDataFields = {
+  label: string;
+  value: number;
+}[];
+
+export type CurrencyRatesData = {
+  id: number;
+  headerTitle: string;
+  chartData1: ChartDataFields;
+  chartData2: ChartDataFields;
+  firstCurrency: Currency;
+  secondCurrency: Currency;
+  thirdCurrency: Currency;
+  targetCurrency: Currency;
+  firstCurrencyName: string;
+  secondCurrencyName: string;
+}[];
+
+export type ChartsDataProp = {
+  historicalRates: HistoricalRates;
+};
+
+export type ConverterResultValuesProps = {
+  firstCurrencyName: string;
+  secondCurrencyName: string;
+  convertedValues: Record<string, number>;
+  convertedAmount: string;
+  targetCurrency: Currency;
+  firstCurrency: Currency;
+  secondCurrency: Currency;
+  trends: Trends;
+};
+
+export type ConverterInputWithButtonProps = {
+  targetCurrency: Currency;
+  ratesForBase: Record<string, RateEntry> | null;
+  emptyFieldError: NullableString;
+  inputAmount: string;
+  onChangeTextInputState: (text: string) => void;
+  onPressConvert: OnPress;
+};
+
+export type ConverterChartProps = ChartDetailsProps & {
+  currencyName: string;
+  currency: Currency;
+  isOtherChart: boolean;
+  color: string;
+};
+
+export type ModalContentMapProps = {
+  metalRates: UseFetchedMetalRatesProps;
+  selectedIndex: NullableNumber;
+  modalContentMap: ModalContentMapProp;
+};
+
+export type SliderWithOptionsInfoProps = {
+  setSelectedIndex: SetState<NullableNumber>;
+  formModal: ModalProps;
+};
+
+export type GlassCurrencyCardProps = ChildProps & {
+  convertedAmount: string;
+  targetCurrency: Currency;
+};
+
+export type ArrowIconProp = {
+  name: string;
+};
+
+export type CurrencyValueWithSymbolProps = {
+  value: number;
+  currency: string;
+  children?: Children;
+};
+
+export type ExchangeValuesWithInputTitleProps = {
+  targetCurrency: Currency;
+  ratesForBase: Record<string, RateEntry> | null;
+};
+
+export type CurrencyChangePercentProps = {
+  isOtherChart: boolean;
+  trendInfoForChart1: TrendInfo;
+  trendInfoForChart2: TrendInfo;
+};
+
+export type TrendDirection = "up" | "down" | "neutral";
+export type IconDirection = "arrow-up" | "arrow-down" | "minus";
+
+export type ChartsData = {
+  currencyName: string;
+  currency: Currency;
+  color: string;
+  isOtherChart: boolean;
+}[];
+
+export type ConverterChartsHeaderProp = {
+  exchangeRates: ExchangeRatesProp;
+};
+
+export type ConverterRenderChartsProps = ConverterChartsHeaderProp &
+  ChartDetailsProps & {
+    firstCurrencyName: string;
+    secondCurrencyName: string;
+    firstCurrency: Currency;
+    secondCurrency: Currency;
+  };
+
+export type ChartScalePositionProps = {
+  yMin: number;
+  yMax: number;
+};
+
+type ChartDataKey =
+  | "chartDataEURforUSD"
+  | "chartDataPLNforUSD"
+  | "chartDataUSDforPLN"
+  | "chartDataUSDforEUR"
+  | "chartDataEUR"
+  | "chartDataPLN";
+
+type ChartDataProps = {
+  label: string;
+  value: number;
+};
+
+export type Chart = {
+  [K in ChartDataKey]: ChartDataProps[];
+};
+
+export type MetalRatesPromiseProps = {
+  setLoadingData: SetState<boolean>;
+  setErrorMessage: SetState<NullableString>;
+  setApiDate: SetState<NullableString>;
+  setRates: SetState<RatesProp>;
+  setMarketRate: SetState<MarketRateProp>;
+};
+
+export type ExchangeRatesDataProp = {
+  data: ExchangeRates;
 };

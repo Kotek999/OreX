@@ -8,6 +8,13 @@ import { getMetalPrice } from "../../../helpers/functions/getMetalPrice";
 import { JSX, MetalRates, UnitBoxProps } from "../../../types";
 
 export const UnitBox = (props: UnitBoxProps): JSX => {
+  const renderMarketRate: string = getMetalPrice({
+    inputs: props.inputs,
+    output: props.output,
+    selectedCurrencyTo: props.selectedCurrencyTo,
+    metalType: props.metalType,
+    priceType: props.priceType as keyof MetalRates,
+  });
   return (
     <LinearGradient
       colors={["#0891b2", "#0c4a6e"]}
@@ -39,15 +46,7 @@ export const UnitBox = (props: UnitBoxProps): JSX => {
             color="#f8fafc"
           >
             {props.marketRate ? (
-              <>
-                {getMetalPrice({
-                  inputs: props.inputs,
-                  output: props.output,
-                  selectedCurrencyTo: props.selectedCurrencyTo,
-                  metalType: props.metalType,
-                  priceType: props.priceType as keyof MetalRates,
-                })}
-              </>
+              <>{renderMarketRate}</>
             ) : (
               <Text fontSize={18} color="#f8fafc">
                 N/A

@@ -6,12 +6,10 @@ import { screenWidth } from "../helpers/dimensions";
 import { welcomeScreenBg } from "../helpers/imageRequirements";
 import { TextMessageLarge } from "../components/Atoms/TextMessageLarge";
 import { SubmitButton } from "../components/Atoms/SubmitButton";
-import { JSX } from "../types";
-
-// #000000c0
+import { JSX, OnPress } from "../types";
 
 export default function Welcome(): JSX {
-  const onPressNavigateToHomeScreen = () => router.navigate("/home");
+  const onPressNavigateToHomeScreen: OnPress = () => router.navigate("/home");
 
   return (
     <View flex={1} bg="#030712">
@@ -26,9 +24,9 @@ export default function Welcome(): JSX {
         />
         <View flex={1} justifyContent="center">
           <TextMessageLarge color="#fafafa">
-            Łatwo przeliczaj złoto i srebro na odpowiadające{" "}
-            <TextMessageLarge color="#6ee7b7">Tobie</TextMessageLarge> waluty po
-            aktualnych kursach.
+            Łatwo przeliczaj złoto, srebro i waluty na wartości{" "}
+            <TextMessageLarge color="#6ee7b7">Tobie</TextMessageLarge>{" "}
+            odpowiadające po bieżących kursach.
           </TextMessageLarge>
         </View>
       </View>

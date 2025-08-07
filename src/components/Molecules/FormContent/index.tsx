@@ -5,9 +5,9 @@ import { FormHeader } from "../../Atoms/FormHeader";
 import { ScrollViewContainer } from "../../Atoms/ScrollViewContainer";
 import { FormInputFields } from "../../Atoms/FormInputFields";
 import { CurrencyPicker } from "../../Atoms/CurrencyPicker";
-import { JSX, NullableString, FormContentProps } from "../../../types";
-import { currencySymbols } from "../../../helpers/data/currencySymbols";
+import { currencySymbols } from "../../../helpers/data/currencyData";
 import { screenWidth } from "../../../helpers/dimensions";
+import { JSX, NullableString, FormContentProps } from "../../../types";
 
 export const FormContent = (props: FormContentProps): JSX => {
   const [emptyGoldFieldError, setEmptyGoldFieldError] =

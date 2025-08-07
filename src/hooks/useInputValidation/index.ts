@@ -1,8 +1,20 @@
 import { useEffect, useCallback, useRef } from "react";
-import { InputValidationProps, NullableString, SetState } from "../../types";
+import {
+  InputsType,
+  InputValidationProps,
+  NullableString,
+  SetState,
+  MutableRefProp,
+} from "../../types";
 
 export const useInputValidation = (props: InputValidationProps) => {
-  const prevInputs = useRef(props.inputs);
+  const prevInputs: MutableRefProp<InputsType> = useRef(props.inputs);
+
+  const currentInputOneRule: boolean =
+    prevInputs.current.inputOne !== props.inputs.inputOne;
+  const currentInputTwoRule: boolean =
+    prevInputs.current.inputTwo !== props.inputs.inputTwo;
+  const currentInputs: InputsType = (prevInputs.current = props.inputs);
 
   const emptyFieldError: SetState<NullableString> =
     props.setErrorMessages.setEmptyFieldError;
@@ -19,13 +31,9 @@ export const useInputValidation = (props: InputValidationProps) => {
   }, [props.inputs, emptyFieldError, emptyPriceFieldError]);
 
   useEffect(() => {
-    if (
-      prevInputs.current.inputOne !== props.inputs.inputOne ||
-      prevInputs.current.inputTwo !== props.inputs.inputTwo
-    ) {
+    if (currentInputOneRule || currentInputTwoRule) {
       handleInputValidation();
-
-      prevInputs.current = props.inputs;
+      currentInputs;
     }
   }, [
     props.inputs,

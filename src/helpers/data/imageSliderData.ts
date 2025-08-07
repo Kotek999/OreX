@@ -23,7 +23,7 @@ export const imageSliderData: ImageSliderData[] = [
     description: "Kliknij, aby przeliczyć...",
   },
   {
-    title: "Polskie Złote",
+    title: "Złoty",
     image: silverBg,
     flag: flagOfPolandIcon,
     description: "Kliknij, aby przeliczyć...",
@@ -35,7 +35,7 @@ export const imageSliderData: ImageSliderData[] = [
     description: "Kliknij, aby przeliczyć...",
   },
   {
-    title: "Dolary",
+    title: "Dolar amerykański",
     image: silverBg,
     flag: flagOfEuropeIcon,
     description: "Kliknij, aby przeliczyć...",

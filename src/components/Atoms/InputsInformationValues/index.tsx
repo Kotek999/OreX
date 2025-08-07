@@ -6,22 +6,29 @@ import { formatSpecificWordWithValue } from "../../../helpers/functions/formatSp
 import { targetCurrencyNameChecker } from "../../../helpers/functions/targetCurrencyNameChecker";
 import { currencySymbolChecker } from "../../../helpers/functions/currencySymbolChecker";
 import { TextMessage600 } from "../TextMessage600";
-import { JSX, InputsInformationValuesProps } from "../../../types";
+import {
+  JSX,
+  InputsInformationValuesProps,
+  ReactNodeLike,
+} from "../../../types";
 
 export const InputsInformationValues = (
   props: InputsInformationValuesProps
 ): JSX => {
-  const parsedInputOne = parseFloat(props.inputs.inputOne);
-  const parsedInputTwo = parseFloat(props.inputs.inputTwo);
+  const parsedInputOne: number = parseFloat(props.inputs.inputOne);
+  const parsedInputTwo: number = parseFloat(props.inputs.inputTwo);
 
-  const inputOneValue = formatSpecificWordWithValue(parsedInputOne, "gram");
+  const inputOneValue: ReactNodeLike = formatSpecificWordWithValue(
+    parsedInputOne,
+    "gram"
+  );
 
-  const inputTwoValue = targetCurrencyNameChecker(
+  const inputTwoValue: ReactNodeLike | undefined = targetCurrencyNameChecker(
     props.selectedCurrencyFrom,
     parsedInputTwo
   );
 
-  const dividedValue = `${formatNumber(
+  const dividedValue: string = `${formatNumber(
     parsedInputTwo / parsedInputOne
   )} ${currencySymbolChecker(props.selectedCurrencyFrom)}`;
 

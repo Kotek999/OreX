@@ -1,7 +1,7 @@
 import { Text } from "react-native-magnus";
-import { JSX, TextResultProps } from "../../../types";
+import { JSX, TextMessageProps } from "../../../types";
 
-export const TextResult = (props: TextResultProps): JSX => {
+export const TextResult = (props: TextMessageProps): JSX => {
   return (
     <Text
       fontSize={20}

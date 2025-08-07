@@ -1,9 +1,9 @@
 import React from "react";
 import { Text } from "react-native-magnus";
 import { screenWidth } from "../../../helpers/dimensions";
-import { TextMessageLargeProps, JSX } from "../../../types";
+import { TextMessageProps, JSX } from "../../../types";
 
-export const TextMessageLarge = (props: TextMessageLargeProps): JSX => {
+export const TextMessageLarge = (props: TextMessageProps): JSX => {
   return (
     <Text
       w={screenWidth}

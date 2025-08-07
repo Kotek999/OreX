@@ -3,7 +3,7 @@ import { Div as View, Button } from "react-native-magnus";
 import { screenWidth } from "../../../helpers/dimensions";
 import { calculateMetalPrices } from "../../../helpers/functions/calculateMetalPrices";
 import { useInputValidation } from "../../../hooks/useInputValidation";
-import { JSX, CalculatedMetalPriceProps } from "../../../types";
+import { JSX, CalculatedMetalPriceProps, OnPress } from "../../../types";
 
 export const CalculatedMetalPrice = <
   InputsType extends { inputOne: string; inputTwo: string }
@@ -12,7 +12,7 @@ export const CalculatedMetalPrice = <
 ): JSX => {
   const metalPriceValues: CalculatedMetalPriceProps<InputsType> = { ...props };
 
-  const onPressCalculatePrices = useCallback(() => {
+  const onPressCalculatePrices: OnPress = useCallback(() => {
     calculateMetalPrices(metalPriceValues);
   }, [metalPriceValues]);
 

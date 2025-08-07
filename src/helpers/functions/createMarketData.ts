@@ -1,4 +1,4 @@
-import { currencySymbols } from "../data/currencySymbols";
+import { currencySymbols } from "../data/currencyData";
 
 export const createMarketData = <T extends unknown>(
   defaultValues: T

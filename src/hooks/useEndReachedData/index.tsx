@@ -3,6 +3,7 @@ import {
   ImageSliderData,
   UseEndReachedDataProps,
   EndReachedDataProps,
+  OnPress,
 } from "../../types";
 
 export const useEndReachedData = (
@@ -10,7 +11,7 @@ export const useEndReachedData = (
 ): EndReachedDataProps => {
   const [data, setData] = useState<ImageSliderData[]>(props.itemList);
 
-  const onEndReached = (): void => setData([...data, ...props.itemList]);
+  const onEndReached: OnPress = () => setData([...data, ...props.itemList]);
 
   return { data, onEndReached };
 };

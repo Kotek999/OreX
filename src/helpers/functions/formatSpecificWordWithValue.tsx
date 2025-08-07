@@ -1,13 +1,13 @@
 import React from "react";
 import { Text } from "react-native-magnus";
 import { formatNumber } from "./formatNumber";
-import { JSX, currenciesMap } from "../../types";
+import { JSX, CurrenciesMap } from "../../types";
 
 export const formatSpecificWordWithValue = (
   value: number,
   word: string
 ): JSX | string => {
-  const words: currenciesMap = {
+  const words: CurrenciesMap = {
     gram: ["gram", "gramy", "gramów"],
     euro: ["euro", "euro", "euro"],
     złoty: ["złoty", "złote", "złotych"],
@@ -15,7 +15,7 @@ export const formatSpecificWordWithValue = (
   };
 
   const forms: [string, string, string] = words[
-    word as keyof currenciesMap
+    word as keyof CurrenciesMap
   ] || [word, word, word];
 
   const unit: string =
