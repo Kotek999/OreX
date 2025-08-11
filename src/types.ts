@@ -455,7 +455,6 @@ export type ImageSliderData = {
   title: string;
   image: ImageSourcePropType;
   flag: ImageSourcePropType;
-  description: string;
 };
 
 export type SliderItemProps = {

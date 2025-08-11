@@ -10,6 +10,8 @@ export const SliderItem = memo((props: SliderItemProps): JSX => {
   const onPressSelectIndex = (): void =>
     props.onPressSelectIndex(props.paginationIndex + 1);
 
+  const description: string = "Kliknij, aby przeliczyć...";
+
   return (
     <Animated.View style={styles.animatedContainer}>
       <TouchableOpacity onPress={onPressSelectIndex}>
@@ -49,7 +51,7 @@ export const SliderItem = memo((props: SliderItemProps): JSX => {
                     fontWeight="400"
                     letterSpacing={1.5}
                   >
-                    {props.item.description}
+                    {description}
                   </Text>
                 </View>
                 <View alignItems="flex-end">

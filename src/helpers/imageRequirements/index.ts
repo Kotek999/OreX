@@ -11,10 +11,12 @@ const flagOfEuropeIcon: ImageSourcePropType = require("../../../src/assets/icons
 const flagOfPolandIcon: ImageSourcePropType = require("../../../src/assets/icons/flagOfPolandIcon.png");
 
 const welcomeScreenBg: ImageSourcePropType = require("../../../src/assets/gifs/financial.gif");
-const goldBg: ImageSourcePropType = require("../../../src/assets/images/goldBg1.png");
-const silverBg: ImageSourcePropType = require("../../../src/assets/images/silverBg2.png");
 
-const test: ImageSourcePropType = require("../../../src/assets/images/test_2.png");
+const goldBg: ImageSourcePropType = require("../../../src/assets/images/goldBg.png");
+const silverBg: ImageSourcePropType = require("../../../src/assets/images/silverBg.png");
+const plnBg: ImageSourcePropType = require("../../../src/assets/images/plnBg.png");
+const eurBg: ImageSourcePropType = require("../../../src/assets/images/eurBg.png");
+const usdBg: ImageSourcePropType = require("../../../src/assets/images/usdBg.png");
 
 export {
   euro,
@@ -27,5 +29,7 @@ export {
   welcomeScreenBg,
   goldBg,
   silverBg,
-  test,
+  plnBg,
+  eurBg,
+  usdBg,
 };
