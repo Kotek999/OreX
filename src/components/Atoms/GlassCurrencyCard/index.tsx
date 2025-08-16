@@ -18,7 +18,8 @@ export const GlassCurrencyCard = (props: GlassCurrencyCardProps): JSX => {
           justifyContent="space-evenly"
         >
           <TextCurrency>
-            {props.convertedAmount} {props.targetCurrency}
+            {props.convertedAmount}{" "}
+            <TextCurrency fontWeight="600">{props.targetCurrency}</TextCurrency>
           </TextCurrency>
           <View flexDir="column">
             <ArrowIcon name="arrow-top-right" />

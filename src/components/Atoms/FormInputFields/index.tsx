@@ -3,6 +3,7 @@ import { Div as View } from "react-native-magnus";
 import { InputField } from "../../Atoms/InputField";
 import { ErrorMessage } from "../../Atoms/ErrorMessage";
 import { inputsData } from "../../../helpers/data/inputsData";
+import { iconFontFamilyType } from "react-native-magnus/lib/typescript/src/ui/icon/icon.type";
 import {
   JSX,
   FormInputFieldsProps,
@@ -10,7 +11,6 @@ import {
   InputsType,
   InputDataWithTextValuesProps,
 } from "../../../types";
-import { iconFontFamilyType } from "react-native-magnus/lib/typescript/src/ui/icon/icon.type";
 
 export const FormInputFields = (props: FormInputFieldsProps): JSX => {
   const inputs: InputDataWithTextValuesProps = inputsData(props);

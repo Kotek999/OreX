@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import Animated from "react-native-reanimated";
 import { TouchableOpacity, ImageBackground, StyleSheet } from "react-native";
 import { Div as View, Text, Image } from "react-native-magnus";
-import { screenWidth } from "../../../helpers/dimensions";
+import { screenHeight, screenWidth } from "../../../helpers/dimensions";
 import { LinearGradient } from "expo-linear-gradient";
 import { JSX, SliderItemProps } from "../../../types";
 
@@ -20,8 +20,8 @@ export const SliderItem = memo((props: SliderItemProps): JSX => {
           resizeMethod="scale"
           alt="photo"
           source={props.item.image}
-          width={screenWidth / 1.5}
-          height={400}
+          width={screenWidth / 1.4}
+          height={screenHeight / 2.2}
           borderRadius={20}
           style={styles.imageContainer}
         >
@@ -79,16 +79,16 @@ const styles = StyleSheet.create({
     width: screenWidth,
   },
   imageContainer: {
-    width: screenWidth / 1.5,
-    height: 400,
+    width: screenWidth / 1.4,
+    height: screenHeight / 2.2,
     borderRadius: 20,
     justifyContent: "space-between",
     padding: 20,
   },
   gradientContainer: {
     position: "absolute",
-    height: 400,
-    width: screenWidth / 1.5,
+    width: screenWidth / 1.4,
+    height: screenHeight / 2.2,
     padding: 20,
     borderRadius: 20,
     justifyContent: "space-between",

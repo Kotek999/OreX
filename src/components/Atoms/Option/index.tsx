@@ -4,7 +4,7 @@ import { screenHeight, screenWidth } from "../../../helpers/dimensions";
 import { OptionProps, JSX } from "../../../types";
 
 export const Option = (props: OptionProps): JSX => {
-  const minHeight: number = screenHeight * 0.12;
+  const minHeight: number = screenHeight * 0.13;
 
   return (
     <Collapse

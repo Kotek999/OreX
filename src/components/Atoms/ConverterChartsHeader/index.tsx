@@ -3,13 +3,14 @@ import { Div as View, Text } from "react-native-magnus";
 import { TextMessage600 } from "../../../components/Atoms/TextMessage600";
 import { formatDateWithDay } from "../../../helpers/functions/formatDateWithDay";
 import { JSX, ConverterChartsHeaderProp } from "../../../types";
+import { screenWidth } from "../../../helpers/dimensions";
 
 export const ConverterChartsHeader = (
   props: ConverterChartsHeaderProp
 ): JSX => {
   return (
-    <View flexDir="row" justifyContent="space-between">
-      <View flex={1}>
+    <View flexDir="row" justifyContent="space-evenly">
+      <View w={screenWidth / 1.8}>
         <Text
           color="#e2e8f0"
           fontSize={18}

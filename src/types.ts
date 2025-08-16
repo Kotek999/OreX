@@ -530,7 +530,7 @@ export type TextProps = SpacingProps &
   };
 
 export type SectionProps = TextProps & {
-  title: string;
+  title?: string;
 };
 
 export type OptionsDataProps = {
@@ -891,4 +891,8 @@ export type MetalRatesPromiseProps = {
 
 export type ExchangeRatesDataProp = {
   data: ExchangeRates;
+};
+
+export type UseAllRatesProps = {
+  formModal: ModalProps;
 };

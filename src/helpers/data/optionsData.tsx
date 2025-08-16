@@ -72,7 +72,9 @@ export const optionsData: OptionsDataProps[] = [
     iconName: "currency-exchange",
     iconColor: "#4ade80",
     content: (
-      <OptionStyledText color="#f8fafc">{TEXTS.option3.main}</OptionStyledText>
+      <Section color="#f8fafc" title={"Popularnie"} mt="md" mb="xs">
+        {TEXTS.option3.main}
+      </Section>
     ),
   },
 ];

@@ -27,7 +27,7 @@ export const ConverterInputWithButton = (
             focusBorderColor="blue700"
             keyboardType="numeric"
             suffix={
-              <Icon name="price-tag" color="gray700" fontFamily="Entypo" />
+              <Icon name="money" color="gray700" fontFamily="FontAwesome" />
             }
             value={props.inputAmount}
             onChangeText={(text) => props.onChangeTextInputState(text)}

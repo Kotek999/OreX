@@ -59,10 +59,10 @@ export const ConverterChart = (props: ConverterChartProps) => {
           <LineChart
             areaChart
             data={chartData}
-            width={screenWidth - 40}
+            width={screenWidth}
             curved
             thickness={3}
-            spacing={80}
+            spacing={76}
             adjustToWidth
             height={200}
             maxValue={yMaxValue + yMinValue / 2}
@@ -79,7 +79,7 @@ export const ConverterChart = (props: ConverterChartProps) => {
             xAxisColor="transparent"
             xAxisLabelTextStyle={styles.xAxisLabelTextStyle}
             hideRules
-            initialSpacing={40}
+            initialSpacing={35}
             dataPointsColor="#6ee7b7"
             pointerConfig={pointerConfig}
           />
