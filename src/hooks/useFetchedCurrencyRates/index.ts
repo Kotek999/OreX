@@ -114,10 +114,26 @@ export const useFetchedCurrencyRates = (): UseFetchedCurrencyRatesProps => {
 
       basesCurrencies.forEach((base) => {
         allHistoricalRates[base] = {
-          [formatDateLabel(365)]: calculateAverage(allCombinedRates, base, 365),
-          [formatDateLabel(30)]: calculateAverage(allCombinedRates, base, 30),
-          [formatDateLabel(7)]: calculateAverage(allCombinedRates, base, 7),
-          [formatDateLabel(1)]: calculateAverage(allCombinedRates, base, 1),
+          [formatDateLabel(365, true)]: calculateAverage(
+            allCombinedRates,
+            base,
+            365
+          ),
+          [formatDateLabel(30, true)]: calculateAverage(
+            allCombinedRates,
+            base,
+            30
+          ),
+          [formatDateLabel(7, true)]: calculateAverage(
+            allCombinedRates,
+            base,
+            7
+          ),
+          [formatDateLabel(1, true)]: calculateAverage(
+            allCombinedRates,
+            base,
+            1
+          ),
         };
       });
 

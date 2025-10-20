@@ -2,6 +2,7 @@ import { Div as View, Text } from "react-native-magnus";
 import { convertCurrencyValues } from "./convertCurrencyValues";
 import { TextResult } from "../../components/Atoms/TextResult";
 import { ResultMessageWithValue } from "../../components/Atoms/ResultMessageWithValue";
+import { RFValue } from "react-native-responsive-fontsize";
 import {
   JSX,
   CalculateProfitOrLossProps,
@@ -63,7 +64,7 @@ export const calculateProfitOrLoss = (
           ) : (
             <Text
               color="#f8fafc"
-              fontSize={26}
+              fontSize={RFValue(14)}
               fontWeight="900"
               letterSpacing={0.5}
             >

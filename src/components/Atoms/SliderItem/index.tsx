@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import Animated from "react-native-reanimated";
 import { TouchableOpacity, ImageBackground, StyleSheet } from "react-native";
 import { Div as View, Text, Image } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { screenHeight, screenWidth } from "../../../helpers/dimensions";
 import { LinearGradient } from "expo-linear-gradient";
 import { JSX, SliderItemProps } from "../../../types";
@@ -39,7 +40,7 @@ export const SliderItem = memo((props: SliderItemProps): JSX => {
                 <View flex={1} flexDir="column" style={{ gap: 10 }}>
                   <Text
                     color="#fafafa"
-                    fontSize={24}
+                    fontSize={RFValue(15)}
                     fontWeight="bold"
                     letterSpacing={1.5}
                   >
@@ -47,7 +48,7 @@ export const SliderItem = memo((props: SliderItemProps): JSX => {
                   </Text>
                   <Text
                     color="#cbd5e1"
-                    fontSize={12}
+                    fontSize={RFValue(9)}
                     fontWeight="400"
                     letterSpacing={1.5}
                   >

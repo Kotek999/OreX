@@ -1,16 +1,22 @@
-export const formatDateLabel = (daysAgo: number): string => {
-  const today: Date = new Date();
-  const date: Date = new Date();
+import { polishMonthsArray } from "../data/monthsData";
+
+export const formatDateLabel = (
+  daysAgo: number,
+  short: boolean = false
+): string => {
+  const today = new Date();
+  const date = new Date();
   date.setDate(today.getDate() - daysAgo);
 
-  const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "long",
-  };
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
 
-  if (date.getFullYear() !== today.getFullYear()) {
-    options.year = "numeric";
-  }
+  const month = short
+    ? polishMonthsArray[monthIndex].short
+    : polishMonthsArray[monthIndex].polish;
 
-  return date.toLocaleDateString("pl-PL", options);
+  const includeYear = year !== today.getFullYear();
+
+  return `${day} ${month}${includeYear ? ` ${year}` : ""}`;
 };

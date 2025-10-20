@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native-magnus";
 import { formatNumber } from "./formatNumber";
+import { RFValue } from "react-native-responsive-fontsize";
 import { JSX, CurrenciesMap } from "../../types";
 
 export const formatSpecificWordWithValue = (
@@ -29,10 +30,20 @@ export const formatSpecificWordWithValue = (
 
   return (
     <>
-      <Text color="#e2e8f0" fontSize={14} fontWeight="bold" letterSpacing={0.8}>
+      <Text
+        color="#e2e8f0"
+        fontSize={RFValue(11)}
+        fontWeight="bold"
+        letterSpacing={0.8}
+      >
         {formatNumber(value)}{" "}
       </Text>
-      <Text color="#cbd5e1" fontSize={14} fontWeight="600" letterSpacing={0.8}>
+      <Text
+        color="#cbd5e1"
+        fontSize={RFValue(11)}
+        fontWeight="600"
+        letterSpacing={0.8}
+      >
         {unit}
       </Text>
     </>

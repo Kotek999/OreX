@@ -1,5 +1,6 @@
 import React from "react";
 import { Div as View, Text, Input, Icon } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { screenWidth } from "../../../helpers/dimensions";
 import { changeTextInput } from "../../../helpers/functions/changeTextInput";
 import { JSX, InputFieldProps, NullableString } from "../../../types";
@@ -22,7 +23,7 @@ export const InputField = (props: InputFieldProps): JSX => {
       <Text
         mb={14}
         letterSpacing={0.8}
-        fontSize={16}
+        fontSize={RFValue(12)}
         fontWeight="bold"
         color="#f8fafc"
       >

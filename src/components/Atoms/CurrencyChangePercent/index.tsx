@@ -1,11 +1,12 @@
 import React from "react";
 import { Div as View, Text, Icon } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import {
   TrendInfo,
   CurrencyChangePercentProps,
   TrendDirection,
   IconDirection,
-} from "../../types";
+} from "../../../types";
 
 export const CurrencyChangePercent = (props: CurrencyChangePercentProps) => {
   const trendInfoForChart: TrendInfo = props.isOtherChart
@@ -26,7 +27,7 @@ export const CurrencyChangePercent = (props: CurrencyChangePercentProps) => {
       <Icon
         name={iconName}
         color={trendInfoForChart.color}
-        fontSize={13}
+        fontSize={RFValue(12)}
         fontFamily="Feather"
         mr={6}
       />
@@ -34,7 +35,7 @@ export const CurrencyChangePercent = (props: CurrencyChangePercentProps) => {
         color={trendInfoForChart.color}
         letterSpacing={0.7}
         fontWeight="bold"
-        fontSize={13}
+        fontSize={RFValue(11)}
       >
         {`${trendInfoForChart.changePercent.toFixed(2).replace(".", ",")}%`}
       </Text>

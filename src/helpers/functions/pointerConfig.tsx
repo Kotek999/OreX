@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Div as View, Text } from "react-native-magnus";
 import { Pointer } from "react-native-gifted-charts";
+import { RFValue } from "react-native-responsive-fontsize";
 import { LinearGradient } from "expo-linear-gradient";
 import { JSX, ItemType } from "../../types";
 
@@ -24,7 +25,12 @@ export const pointerConfig: Pointer = {
             colors={["#0c4a6e", "#10b981"]}
             style={styles.gradientContainer}
           >
-            <Text color="white" fontWeight="bold" textAlign="center">
+            <Text
+              fontSize={RFValue(11)}
+              color="white"
+              fontWeight="bold"
+              textAlign="center"
+            >
               {items[0].value?.toFixed(3)}
             </Text>
           </LinearGradient>

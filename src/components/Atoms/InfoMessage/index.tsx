@@ -1,5 +1,6 @@
 import React from "react";
 import { Text } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { ChildProps, JSX } from "../../../types";
 
 export const InfoMessage = (props: ChildProps): JSX => {
@@ -7,7 +8,7 @@ export const InfoMessage = (props: ChildProps): JSX => {
     <Text
       p={5}
       color="#f8fafc"
-      fontSize={18}
+      fontSize={RFValue(14)}
       letterSpacing={0.5}
       fontWeight="500"
     >

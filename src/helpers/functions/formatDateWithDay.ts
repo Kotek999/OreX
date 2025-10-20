@@ -1,9 +1,17 @@
-export const formatDateWithDay = (dateString: string): string => {
-  const date: Date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "long",
-  };
+import { polishMonthsArray } from "../data/monthsData";
 
-  return date.toLocaleDateString("pl-PL", options);
+export const formatDateWithDay = (
+  dateString: string,
+  short: boolean = false
+): string => {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  const month = short
+    ? polishMonthsArray[monthIndex].short
+    : polishMonthsArray[monthIndex].polish;
+
+  return `${day} ${month} ${year}`;
 };

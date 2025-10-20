@@ -10,11 +10,13 @@ import {
 } from "react";
 import {
   StyleProp,
+  TextStyle,
   ViewStyle,
   ViewToken,
   Animated as AnimatedStyle,
   ImageSourcePropType,
 } from "react-native";
+import { Text as RNText, Div as RNView } from "react-native-magnus";
 import { lineDataItem } from "react-native-gifted-charts";
 import { ScrollHandlerProcessed } from "react-native-reanimated";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -37,7 +39,7 @@ export type MutableRefProp<T> = MutableRefObject<T>;
 export type ActionCallbackFunctionProps = (...args: any[]) => void;
 export type NullableString = string | null;
 
-type Optional<T> = T | undefined;
+export type Optional<T> = T | undefined;
 
 export type BottomModalRef = BottomSheetModal;
 
@@ -895,4 +897,52 @@ export type ExchangeRatesDataProp = {
 
 export type UseAllRatesProps = {
   formModal: ModalProps;
+};
+
+export type ChartHeaderProps = {
+  w?: string | Optional<number>;
+  title: string;
+  subtitle: string;
+};
+
+type CommonProps = {
+  children?: React.ReactNode;
+  animation?: AnimationType;
+  delay?: number;
+  duration?: number;
+};
+
+export type AnimatedElementProps =
+  | (CommonProps & { as: "Text"; style?: TextStyle } & React.ComponentProps<
+        typeof RNText
+      >)
+  | (CommonProps & { as: "View"; style?: ViewStyle } & React.ComponentProps<
+        typeof RNView
+      >);
+
+export type AnimationType =
+  | "fadeIn"
+  | "slideUp"
+  | "slideDown"
+  | "scaleIn"
+  | "scaleUp"
+  | "fadeInUp";
+
+export type Transforms = {
+  translateY?: number;
+  scale?: number;
+}[];
+
+export type AnimationConfig = {
+  init: () => {
+    opacity?: Optional<number>;
+    translateY?: Optional<number>;
+    scale?: Optional<number>;
+  };
+  animate: (
+    opacity: any,
+    translateY: any,
+    scale: any,
+    duration: number
+  ) => void;
 };

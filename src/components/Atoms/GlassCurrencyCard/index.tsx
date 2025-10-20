@@ -23,7 +23,7 @@ export const GlassCurrencyCard = (props: GlassCurrencyCardProps): JSX => {
           </TextCurrency>
           <View flexDir="column">
             <ArrowIcon name="arrow-top-right" />
-            <View style={{ paddingVertical: 2 }} />
+            <View style={{ paddingVertical: 1 }} />
             <ArrowIcon name="arrow-bottom-right" />
           </View>
           <View flexDir="column">{props.children}</View>

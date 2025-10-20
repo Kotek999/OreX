@@ -1,5 +1,6 @@
 import React from "react";
 import { Div as View, Text } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { formatNumber } from "../../../helpers/functions/formatNumber";
 import { JSX, ExchangeValuesWithInputTitleProps } from "../../../types";
 
@@ -12,7 +13,7 @@ export const ExchangeValuesWithInputTitle = (
       <Text
         key={targetCurrency}
         color="#cbd5e1"
-        fontSize={14}
+        fontSize={RFValue(10)}
         letterSpacing={0.8}
         fontWeight="600"
       >
@@ -27,7 +28,7 @@ export const ExchangeValuesWithInputTitle = (
       <View mb={10} justifyContent="flex-end">
         <Text
           letterSpacing={0.8}
-          fontSize={16}
+          fontSize={RFValue(12)}
           fontWeight="bold"
           color="#f8fafc"
         >
@@ -46,7 +47,7 @@ export const ExchangeValuesWithInputTitle = (
         <View mb={5} alignItems="center">
           <Text
             color="#e2e8f0"
-            fontSize={15}
+            fontSize={RFValue(12)}
             letterSpacing={0.8}
             fontWeight="bold"
           >

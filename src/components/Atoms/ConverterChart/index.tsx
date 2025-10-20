@@ -2,10 +2,11 @@ import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Div as View, Text } from "react-native-magnus";
 import { LineChart, lineDataItem } from "react-native-gifted-charts";
+import { RFValue } from "react-native-responsive-fontsize";
 import { screenWidth } from "../../../helpers/dimensions";
 import { getChartDetails } from "../../../helpers/functions/getChartDetails";
 import { pointerConfig } from "../../../helpers/functions/pointerConfig";
-import { CurrencyChangePercent } from "../../CurrencyChangePercent";
+import { CurrencyChangePercent } from "../CurrencyChangePercent";
 import { ConverterChartProps } from "../../../types";
 
 export const ConverterChart = (props: ConverterChartProps) => {
@@ -36,7 +37,7 @@ export const ConverterChart = (props: ConverterChartProps) => {
         <View flexDir="row" alignItems="center">
           <Text
             color="#e2e8f0"
-            fontSize={18}
+            fontSize={RFValue(14)}
             fontWeight="600"
             letterSpacing={0.8}
           >
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "-25deg" }],
     textAlign: "left",
     color: "#94a3b8",
-    fontSize: 10,
+    fontSize: RFValue(10),
   },
   xAxisTextStyle: { color: "#94a3b8", fontSize: 12 },
 });

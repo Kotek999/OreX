@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Div as View, Text, Icon } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { JSX, FormHeaderProps } from "../../../types";
 
 export const FormHeader = (props: FormHeaderProps): JSX => {
@@ -15,7 +16,7 @@ export const FormHeader = (props: FormHeaderProps): JSX => {
         <View>
           <Text
             color="#f8fafc"
-            fontSize={28}
+            fontSize={RFValue(20)}
             fontWeight="600"
             letterSpacing={1}
           >

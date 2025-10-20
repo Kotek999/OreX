@@ -5,6 +5,7 @@ import { InputsInformationValues } from "../../Atoms/InputsInformationValues";
 import { ProfitOrLossResult } from "../../Atoms/ProfitOrLossResult";
 import { CurrencyImageWithSubtitle } from "../../Atoms/CurrencyImageWithSubtitle";
 import { GlassUnitCards } from "../../Atoms/GlassUnitCards";
+import { AnimatedElement } from "../../Atoms/AnimatedElement";
 import { JSX, MetalPriceContentProps } from "../../../types";
 
 export const MetalPriceContent = (props: MetalPriceContentProps): JSX => {
@@ -17,12 +18,18 @@ export const MetalPriceContent = (props: MetalPriceContentProps): JSX => {
       alignItems="center"
       alignSelf="center"
     >
-      <SelectedCurrenciesWithDate {...props} />
-      <InputsInformationValues {...props} />
+      <AnimatedElement as="View" animation="slideDown" duration={2000}>
+        <SelectedCurrenciesWithDate {...props} />
+      </AnimatedElement>
+      <AnimatedElement as="View" animation="slideDown" duration={2000}>
+        <InputsInformationValues {...props} />
+      </AnimatedElement>
       <ProfitOrLossResult {...props} />
       <CurrencyImageWithSubtitle {...props} />
       <View mt={10}>
-        <GlassUnitCards {...props} />
+        <AnimatedElement as="View" animation="slideUp" duration={2000}>
+          <GlassUnitCards {...props} />
+        </AnimatedElement>
       </View>
     </View>
   );

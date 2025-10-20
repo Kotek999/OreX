@@ -1,5 +1,6 @@
 import React from "react";
 import { Div as View, Text } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { GlassCurrencyCard } from "../GlassCurrencyCard";
 import { CurrencyValueWithSymbol } from "../CurrencyValueWithSymbol";
 import { JSX, Currency, ConverterResultValuesProps } from "../../../types";
@@ -13,7 +14,7 @@ export const ConverterResultValues = (
         flex={1}
         mt={4}
         color="#e2e8f0"
-        fontSize={14}
+        fontSize={RFValue(11)}
         fontWeight="600"
         letterSpacing={0.8}
       >
@@ -35,7 +36,7 @@ export const ConverterResultValues = (
                   <CurrencyValueWithSymbol value={value} currency={currency}>
                     <Text
                       style={{
-                        fontSize: 20,
+                        fontSize: RFValue(16),
                         color: trend?.color,
                       }}
                     >

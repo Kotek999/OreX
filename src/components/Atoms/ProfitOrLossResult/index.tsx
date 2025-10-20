@@ -5,6 +5,7 @@ import { screenWidth } from "../../../helpers/dimensions";
 import { BlurView } from "expo-blur";
 import { calculateProfitOrLoss } from "../../../helpers/functions/calculateProfitOrLoss";
 import { createMarketRates } from "../../../helpers/functions/createMarketRates";
+import { AnimatedElement } from "../AnimatedElement";
 import { JSX, MarketRates, ProfitOrLossResultProps } from "../../../types";
 
 export const ProfitOrLossResult = (props: ProfitOrLossResultProps): JSX => {
@@ -24,15 +25,17 @@ export const ProfitOrLossResult = (props: ProfitOrLossResultProps): JSX => {
 
   return (
     <View flex={8} w={screenWidth / 1.5} justifyContent="center">
-      <BlurView intensity={10} tint="light" style={styles.blurContainer}>
-        {props.marketRate ? (
-          <>{profitOrLossResult}</>
-        ) : (
-          <Text textAlign="center" color="#f8fafc" fontSize={36}>
-            N/A
-          </Text>
-        )}
-      </BlurView>
+      <AnimatedElement as="View" animation="fadeInUp" duration={2000}>
+        <BlurView intensity={10} tint="light" style={styles.blurContainer}>
+          {props.marketRate ? (
+            <>{profitOrLossResult}</>
+          ) : (
+            <Text textAlign="center" color="#f8fafc" fontSize={36}>
+              N/A
+            </Text>
+          )}
+        </BlurView>
+      </AnimatedElement>
     </View>
   );
 };

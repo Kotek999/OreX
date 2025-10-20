@@ -1,5 +1,6 @@
 import React from "react";
 import { Text } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { screenWidth } from "../../../helpers/dimensions";
 import { TextMessageProps, JSX } from "../../../types";
 
@@ -10,7 +11,7 @@ export const TextMessageLarge = (props: TextMessageProps): JSX => {
       lineHeight={34}
       letterSpacing={0.8}
       textAlign="center"
-      fontSize="3xl"
+      fontSize={RFValue(16)}
       fontWeight="500"
       color={props.color}
     >

@@ -8,6 +8,7 @@ import { ConverterInputWithButton } from "../../Atoms/ConverterInputWithButton";
 import { ConverterResultValues } from "../../Atoms/ConverterResultValues";
 import { NotAvailableData } from "../../Atoms/NotAvailableData";
 import { ConverterRenderCharts } from "../../Molecules/ConverterRenderCharts";
+import { AnimatedElement } from "../../Atoms/AnimatedElement";
 import { JSX, CurrencyConverterProps } from "../../../types";
 
 export const CurrencyConverter = (props: CurrencyConverterProps): JSX => {
@@ -28,30 +29,52 @@ export const CurrencyConverter = (props: CurrencyConverterProps): JSX => {
         <Text color="red">{props.error}</Text>
       ) : props.exchangeRates ? (
         <>
-          <FormHeader
-            w={screenWidth - 20}
-            headerTitle={props.headerTitle}
-            formModal={props.formModal}
-          />
+          <AnimatedElement as="View" animation="slideUp" duration={2000}>
+            <FormHeader
+              w={screenWidth - 20}
+              headerTitle={props.headerTitle}
+              formModal={props.formModal}
+            />
+          </AnimatedElement>
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.scrollViewContainer}
           >
-            <ConverterInputWithButton
-              inputAmount={converter.inputAmount}
-              onPressConvert={converter.onPressConvert}
-              onChangeTextInputState={converter.onChangeTextInputState}
-              emptyFieldError={converter.emptyFieldError}
-              ratesForBase={converter.ratesForBase}
-              targetCurrency={props.targetCurrency}
-            />
-            <ConverterResultValues
-              {...props}
-              convertedValues={converter.convertedValues}
-              convertedAmount={converter.convertedAmount}
-            />
-
-            <ConverterRenderCharts {...props} />
+            <AnimatedElement
+              as="View"
+              animation="fadeInUp"
+              delay={150}
+              duration={2000}
+            >
+              <ConverterInputWithButton
+                inputAmount={converter.inputAmount}
+                onPressConvert={converter.onPressConvert}
+                onChangeTextInputState={converter.onChangeTextInputState}
+                emptyFieldError={converter.emptyFieldError}
+                ratesForBase={converter.ratesForBase}
+                targetCurrency={props.targetCurrency}
+              />
+            </AnimatedElement>
+            <AnimatedElement
+              as="View"
+              animation="slideUp"
+              delay={200}
+              duration={2000}
+            >
+              <ConverterResultValues
+                {...props}
+                convertedValues={converter.convertedValues}
+                convertedAmount={converter.convertedAmount}
+              />
+            </AnimatedElement>
+            <AnimatedElement
+              as="View"
+              animation="fadeInUp"
+              delay={400}
+              duration={2000}
+            >
+              <ConverterRenderCharts {...props} />
+            </AnimatedElement>
           </ScrollView>
         </>
       ) : (

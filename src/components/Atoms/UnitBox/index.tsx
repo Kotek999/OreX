@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Div as View, Text, Icon } from "react-native-magnus";
+import { RFValue } from "react-native-responsive-fontsize";
 import { screenWidth } from "../../../helpers/dimensions";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
@@ -28,7 +29,7 @@ export const UnitBox = (props: UnitBoxProps): JSX => {
       <BlurView intensity={10} tint="light" style={styles.blurContainer}>
         <View flex={1} p={20} alignItems="flex-start" justifyContent="center">
           <View flexDir="row" mb={10}>
-            <Text fontSize={18} fontWeight="bold" color="#7dd3fc">
+            <Text fontSize={RFValue(14)} fontWeight="bold" color="#7dd3fc">
               {props.title}
             </Text>
             <Icon
@@ -40,7 +41,7 @@ export const UnitBox = (props: UnitBoxProps): JSX => {
             />
           </View>
           <Text
-            fontSize={14}
+            fontSize={RFValue(11)}
             fontWeight="700"
             letterSpacing={0.5}
             color="#f8fafc"
@@ -48,7 +49,7 @@ export const UnitBox = (props: UnitBoxProps): JSX => {
             {props.marketRate ? (
               <>{renderMarketRate}</>
             ) : (
-              <Text fontSize={18} color="#f8fafc">
+              <Text fontSize={RFValue(11)} color="#f8fafc">
                 N/A
               </Text>
             )}

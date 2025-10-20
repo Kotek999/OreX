@@ -16,18 +16,18 @@ export const convertDate = (dateString: string): string => {
       match as RegExpMatchArray;
 
     const monthsWithPolishNames: MonthsWithPolishNamesProp = {
-      Jan: { polish: "stycznia", index: 0 },
-      Feb: { polish: "lutego", index: 1 },
-      Mar: { polish: "marca", index: 2 },
-      Apr: { polish: "kwietnia", index: 3 },
-      May: { polish: "maja", index: 4 },
-      Jun: { polish: "czerwca", index: 5 },
-      Jul: { polish: "lipca", index: 6 },
-      Aug: { polish: "sierpnia", index: 7 },
-      Sep: { polish: "września", index: 8 },
-      Oct: { polish: "października", index: 9 },
-      Nov: { polish: "listopada", index: 10 },
-      Dec: { polish: "grudnia", index: 11 },
+      Jan: { polish: "sty.", index: 0 },
+      Feb: { polish: "lut.", index: 1 },
+      Mar: { polish: "mar.", index: 2 },
+      Apr: { polish: "kwi.", index: 3 },
+      May: { polish: "maj", index: 4 },
+      Jun: { polish: "cze.", index: 5 },
+      Jul: { polish: "lip.", index: 6 },
+      Aug: { polish: "sie.", index: 7 },
+      Sep: { polish: "wrz.", index: 8 },
+      Oct: { polish: "paź.", index: 9 },
+      Nov: { polish: "lis.", index: 10 },
+      Dec: { polish: "gru.", index: 11 },
     };
 
     const monthData: MonthsData = monthsWithPolishNames[monthStr];
