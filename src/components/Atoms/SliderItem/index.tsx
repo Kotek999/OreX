@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   animatedContainer: {
     justifyContent: "flex-start",
     alignItems: "center",
-    gap: 20,
+    gap: 0,
     width: screenWidth,
   },
   imageContainer: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     height: screenHeight / 2.2,
     borderRadius: 20,
     justifyContent: "space-between",
-    padding: 20,
+    padding: 0,
   },
   gradientContainer: {
     position: "absolute",

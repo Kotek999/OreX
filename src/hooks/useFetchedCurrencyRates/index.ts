@@ -21,7 +21,7 @@ import {
   NullableString,
   UseFetchedCurrencyRatesProps,
 } from "../../types";
-import apiKeys from "../../../apiKeys.json";
+import { apiConfig } from "../../config/apiConfig";
 
 export const useFetchedCurrencyRates = (): UseFetchedCurrencyRatesProps => {
   const [loadingScreenData, setLoadingScreenData] = useState<boolean>(true);
@@ -39,7 +39,7 @@ export const useFetchedCurrencyRates = (): UseFetchedCurrencyRatesProps => {
     try {
       setLoadingScreenData(true);
       const data: ExchangeRates = await buildResponseParameters<ExchangeRates>(
-        apiKeys.exchangeRates.apiKey,
+        apiConfig.exchangeRates.apiKey,
         {
           symbols: `${valueOfPLN},${valueOfEUR}`,
           base: valueOfUSD,
@@ -72,7 +72,7 @@ export const useFetchedCurrencyRates = (): UseFetchedCurrencyRatesProps => {
 
       const historicalData: HistoricalDataResponse =
         await buildResponseParameters<HistoricalDataResponse>(
-          `${apiKeys.historicalData.apiKey}${startDate}..?base=${valueOfEUR}&symbols=${valueOfUSD},${valueOfPLN}`,
+          `${apiConfig.historicalData.apiKey}${startDate}..?base=${valueOfEUR}&symbols=${valueOfUSD},${valueOfPLN}`,
           {
             symbols: `${valueOfUSD},${valueOfPLN}`,
             base: valueOfEUR,

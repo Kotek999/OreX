@@ -5,21 +5,18 @@ import { Slider } from "../../../components/Atoms/Slider";
 import { ScrollViewContainer } from "../../../components/Atoms/ScrollViewContainer";
 import { optionsData } from "../../../helpers/data/optionsData";
 import { Option } from "../../../components/Atoms/Option";
-import { AnimatedElement } from "../../Atoms/AnimatedElement";
 import { JSX, SliderWithOptionsInfoProps } from "../../../types";
 
 export const SliderWithOptionsInfo = (
   props: SliderWithOptionsInfoProps
 ): JSX => {
   return (
-    <View>
-      <AnimatedElement as="View" animation="slideDown" duration={1500}>
-        <Slider
-          itemList={imageSliderData}
-          setSelectedIndex={props.setSelectedIndex}
-          formModal={props.formModal}
-        />
-      </AnimatedElement>
+    <>
+      <Slider
+        itemList={imageSliderData}
+        setSelectedIndex={props.setSelectedIndex}
+        formModal={props.formModal}
+      />
       <ScrollViewContainer>
         {optionsData.map((option, index) => (
           <Option
@@ -33,6 +30,6 @@ export const SliderWithOptionsInfo = (
           </Option>
         ))}
       </ScrollViewContainer>
-    </View>
+    </>
   );
 };

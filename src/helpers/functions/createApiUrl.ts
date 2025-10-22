@@ -1,6 +1,6 @@
-import { apiKey } from "../../../apiKeys.json";
+import { apiConfig } from "../../config/apiConfig";
 
 export const createApiUrl = (currencies: string[]): string => {
   const currencyString: string = currencies.join(",");
-  return `${apiKey}${currencyString}`;
+  return `${apiConfig.apiKey}${currencyString}`;
 };
