@@ -27,7 +27,7 @@ yarn-error.*
 *.pem
 
 # keys
-apiKeys.json
+.env
 
 # local env files
 .env*.local
