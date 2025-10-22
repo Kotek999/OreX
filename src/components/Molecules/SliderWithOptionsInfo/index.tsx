@@ -20,21 +20,19 @@ export const SliderWithOptionsInfo = (
           formModal={props.formModal}
         />
       </AnimatedElement>
-      <View flex={1}>
-        <ScrollViewContainer>
-          {optionsData.map((option, index) => (
-            <Option
-              key={`option-${index}`}
-              headerTitle={option.headerTitle}
-              fontFamily={option.fontFamily}
-              iconName={option.iconName}
-              iconColor={option.iconColor}
-            >
-              <View>{option.content}</View>
-            </Option>
-          ))}
-        </ScrollViewContainer>
-      </View>
+      <ScrollViewContainer>
+        {optionsData.map((option, index) => (
+          <Option
+            key={`option-${index}`}
+            headerTitle={option.headerTitle}
+            fontFamily={option.fontFamily}
+            iconName={option.iconName}
+            iconColor={option.iconColor}
+          >
+            <View>{option.content}</View>
+          </Option>
+        ))}
+      </ScrollViewContainer>
     </View>
   );
 };
