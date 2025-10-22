@@ -11,25 +11,27 @@ export const SliderWithOptionsInfo = (
   props: SliderWithOptionsInfoProps
 ): JSX => {
   return (
-    <>
+    <View>
       <Slider
         itemList={imageSliderData}
         setSelectedIndex={props.setSelectedIndex}
         formModal={props.formModal}
       />
-      <ScrollViewContainer>
-        {optionsData.map((option, index) => (
-          <Option
-            key={`option-${index}`}
-            headerTitle={option.headerTitle}
-            fontFamily={option.fontFamily}
-            iconName={option.iconName}
-            iconColor={option.iconColor}
-          >
-            <View>{option.content}</View>
-          </Option>
-        ))}
-      </ScrollViewContainer>
-    </>
+      <View flex={1}>
+        <ScrollViewContainer>
+          {optionsData.map((option, index) => (
+            <Option
+              key={`option-${index}`}
+              headerTitle={option.headerTitle}
+              fontFamily={option.fontFamily}
+              iconName={option.iconName}
+              iconColor={option.iconColor}
+            >
+              <View>{option.content}</View>
+            </Option>
+          ))}
+        </ScrollViewContainer>
+      </View>
+    </View>
   );
 };
