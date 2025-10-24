@@ -28,7 +28,7 @@ export const calculateProfitOrLoss = (
       : props.marketRates[props.selectedCurrencyTo].silver.pricePerGram;
 
   const marketValue: number = props.grams * marketRate;
-  const userValue: number = props.grams * userPriceInSelectedCurrency;
+  const userValue: number = userPriceInSelectedCurrency;
 
   const difference: number = marketValue - userValue;
 
