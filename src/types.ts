@@ -15,6 +15,9 @@ import {
   ViewToken,
   Animated as AnimatedStyle,
   ImageSourcePropType,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  KeyboardTypeOptions,
 } from "react-native";
 import { Text as RNText, Div as RNView } from "react-native-magnus";
 import { lineDataItem } from "react-native-gifted-charts";
@@ -51,12 +54,14 @@ export type ModalProps = {
 
 export type BottomModalProps = ChildProps & {
   enableContentPanningGesture?: Optional<boolean>;
-  snapPointsValue: string | number;
+  snapPointsValue: NullableString;
   onPressCloseModal: OnPress;
-  isTitleExist?: boolean;
-  isDefaultStyle?: boolean;
-  styles?: StyleProp<ViewStyle | AnimatedStyle.AnimatedProps<ViewStyle>>;
-  title?: string;
+  isTitleExist?: Optional<boolean>;
+  isDefaultStyle?: Optional<boolean>;
+  styles?: Optional<
+    StyleProp<ViewStyle | AnimatedStyle.AnimatedProps<ViewStyle>>
+  >;
+  title?: Optional<string>;
 };
 
 export type BottomModalExoticComponent = ForwardRefExoticComponent<
@@ -104,10 +109,10 @@ export type MetalRate = {
   pricePerGram: number;
 };
 
-export type OptionalMetalType = {
-  gold?: MetalRates;
-  silver?: MetalRates;
-};
+export type OptionalMetalType = Partial<{
+  gold: MetalRates;
+  silver: MetalRates;
+}>;
 
 export type OutputProp = Record<string, OptionalMetalType>;
 export type MetalType = "gold" | "silver";
@@ -130,7 +135,7 @@ type SetSelectedCurrencyProps = {
 };
 
 export type MetalProps<InputsType> = InputOptions<InputsType> & {
-  id?: number;
+  id?: Optional<number>;
   metalType: MetalType;
   headerTitle: string;
   loading: boolean;
@@ -198,13 +203,13 @@ export type ChangeInputStateProps = (
   setInputs: SetState<InputsType>
 ) => void;
 
-export type TextInputOptionsProps = {
-  name?: keyof InputsType;
-  onChangeText?: ChangeInputStateProps;
-  inputs?: InputsType;
-  setInputs?: SetState<InputsType>;
-  setSingleInput?: (value: string) => void;
-};
+export type TextInputOptionsProps = Partial<{
+  name: keyof InputsType;
+  onChangeText: ChangeInputStateProps;
+  inputs: InputsType;
+  setInputs: SetState<InputsType>;
+  setSingleInput: (value: string) => void;
+}>;
 
 export type ChangeTextInputProps = (
   text: string,
@@ -225,11 +230,29 @@ export type FormContentProps = SelectedCurrencyProps &
     metalModal: ModalProps;
     headerTitle: string;
     inputs: InputsType;
+    output: OutputProp;
+    marketRate: MarketRateProp;
+    loading: boolean;
     setInputs: SetState<InputsType>;
     onChangeText: ChangeInputStateProps;
     rates: Record<string, CurrencyRates> | null;
     setLoading: SetState<boolean>;
     setOutput: SetState<OutputProp>;
+  };
+
+export type MetalScreenProps = SelectedCurrencyProps &
+  SetSelectedCurrencyProps & {
+    metalType: MetalType;
+    formModal: ModalProps;
+    metalModal: ModalProps;
+    headerTitle: string;
+    inputs: InputsType;
+    setInputs: SetState<InputsType>;
+    onChangeText: ChangeInputStateProps;
+    rates: Record<string, CurrencyRates> | null;
+    setLoading: SetState<boolean>;
+    setOutput: SetState<OutputProp>;
+    sheetModal: ModalProps;
   };
 
 export type SelectedCurrenciesWithDateProps = SelectedCurrencyProps & {
@@ -281,8 +304,8 @@ export type InputFieldProps = {
 };
 
 export type FormInputFieldsProps = {
-  emptyGoldFieldError: NullableString;
-  emptyPriceGoldFieldError: NullableString;
+  emptyMetalFieldError: NullableString;
+  emptyPriceMetalFieldError: NullableString;
   inputs: InputsType;
   setInputs: SetState<InputsType>;
   onChangeText: ChangeInputStateProps;
@@ -380,19 +403,21 @@ export type Field = {
 
 export type Fields = Field | Field[];
 
+type FontWeightValues =
+  | "normal"
+  | "bold"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900";
+
 export type TextCurrencyProps = ChildProps & {
-  fontWeight?:
-    | "normal"
-    | "bold"
-    | "100"
-    | "200"
-    | "300"
-    | "400"
-    | "500"
-    | "600"
-    | "700"
-    | "800"
-    | "900";
+  fontWeight?: Optional<FontWeightValues>;
 };
 
 export type TextMessageProps = TextCurrencyProps & {
@@ -401,8 +426,8 @@ export type TextMessageProps = TextCurrencyProps & {
 };
 
 export type InputDataProps = {
-  emptyGoldFieldError: NullableString;
-  emptyPriceGoldFieldError: NullableString;
+  emptyMetalFieldError: NullableString;
+  emptyPriceMetalFieldError: NullableString;
   inputs: InputsType;
   setInputs: SetState<InputsType>;
   onChangeText: ChangeInputStateProps;
@@ -419,19 +444,28 @@ export type InputDataWithTextValuesProps = {
   inputs: InputsType;
   setInputs: SetState<InputsType>;
   onChangeText: ChangeInputStateProps;
-  emptyGoldFieldError: NullableString;
+  emptyMetalFieldError: NullableString;
   emptyFieldError: NullableString;
 }[];
 
+type AlignItemsPosition =
+  | "flex-end"
+  | "flex-start"
+  | "center"
+  | "stretch"
+  | "baseline";
+
 export type CustomPickerProps = {
-  alignItems?: "flex-end" | "flex-start" | "center" | "stretch" | "baseline";
+  alignItems?: Optional<AlignItemsPosition>;
   selectedValue: string;
   setValue: (value: SetStateAction<string>) => void;
 };
 
 export type SubmitButtonProps = {
   title: string;
+  bg?: Optional<string>;
   onPress: OnPress;
+  disabled?: boolean | null | undefined;
 };
 
 export type MarketRateProps = {
@@ -527,12 +561,12 @@ type SpacingProps = {
 
 export type TextProps = SpacingProps &
   ChildProps & {
-    color?: string;
-    mt?: string;
+    color?: Optional<string>;
+    mt?: Optional<string>;
   };
 
 export type SectionProps = TextProps & {
-  title?: string;
+  title?: Optional<string>;
 };
 
 export type OptionsDataProps = {
@@ -585,7 +619,7 @@ type ExchangeRatesProp = Record<string, Record<string, RateEntry>> | null;
 export type CurrencyConverterProps = ChartDetailsProps & {
   exchangeRates: ExchangeRatesProp;
   loadingScreenData: boolean;
-  error: string | null;
+  error: NullableString;
   formModal: ModalProps;
   headerTitle: string;
   targetCurrency: Currency;
@@ -678,8 +712,8 @@ type LabelText = {
 };
 
 export type ItemType = {
-  value?: number;
-  labelTextStyle?: LabelText;
+  value?: Optional<number>;
+  labelTextStyle?: Optional<LabelText>;
   labelComponent: Function;
   label: String;
 };
@@ -906,10 +940,10 @@ export type ChartHeaderProps = {
 };
 
 type CommonProps = {
-  children?: React.ReactNode;
-  animation?: AnimationType;
-  delay?: number;
-  duration?: number;
+  children?: Optional<Children>;
+  animation?: Optional<AnimationType>;
+  delay?: Optional<number>;
+  duration?: Optional<number>;
 };
 
 export type AnimatedElementProps =
@@ -929,8 +963,8 @@ export type AnimationType =
   | "fadeInUp";
 
 export type Transforms = {
-  translateY?: number;
-  scale?: number;
+  translateY?: Optional<number>;
+  scale?: Optional<number>;
 }[];
 
 export type AnimationConfig = {
@@ -946,3 +980,164 @@ export type AnimationConfig = {
     duration: number
   ) => void;
 };
+
+export type Item = {
+  uniqueKey: number;
+  id: number;
+  name: string;
+  weight: string;
+  price: string;
+};
+
+export type EditableInputProps = {
+  value: string;
+  onChange: (text: string) => void;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+};
+
+export type ItemInputsProps = {
+  items: Item[];
+  addItem: (item: Item) => void;
+  addItemModal: ModalProps;
+};
+
+type ScrollHandler = {
+  scrollHandler: ScrollHandlerProp;
+};
+
+type AnimatedStyle = {
+  animatedStyle: {
+    transform: {
+      translateY: number;
+    }[];
+    opacity: number;
+    shadowOpacity: number;
+  };
+};
+
+export type ItemBottomCardAnimationProps = ScrollHandler & AnimatedStyle;
+
+export type ItemsListProps = ScrollHandler & {
+  items: Item[];
+  editingId: NullableNumber;
+  saveItem: (id: number, updated: Partial<Item>) => void;
+  deleteItem: (id: number) => void;
+  editStartItem: (item: Item) => void;
+};
+
+export type LocalStorageItemsProps = {
+  metalType: MetalType;
+  setItems: SetState<Item[]>;
+  items: Item[];
+};
+
+export type CalculatedItemValuesProps = {
+  items: Item[];
+  rates: Record<string, CurrencyRates> | null;
+  metalType: MetalType;
+};
+
+export type ChangeNumericProps = {
+  field: "weight" | "price";
+  text: string;
+  changeText: (field: string, value: string) => void;
+};
+
+export type ItemSheetScreenProps = {
+  sheetModal: ModalProps;
+  metalType: MetalType;
+  rates: Record<string, CurrencyRates> | null;
+};
+
+export type TextAlign = "left" | "center" | "right";
+
+export type ItemRow<T> = {
+  flex: number;
+  name?: Optional<string>;
+  textAlign: TextAlign;
+  render: (item: T) => React.ReactNode;
+};
+
+export type ItemAddInputsProps = {
+  name?: Optional<string>;
+  weight?: Optional<string>;
+  price?: Optional<string>;
+  changeText: (field: string, value: string) => void;
+  changeNumericAction: (field: "weight" | "price", text: string) => void;
+  formatOnBlur: (value: string) => string;
+  setWeight: (value: SetStateAction<string>) => void;
+  setPrice: (value: SetStateAction<string>) => void;
+};
+
+export type ItemAddInputsData = (props: ItemAddInputsProps) => {
+  flex: number;
+  fieldName: string;
+  placeholder: string;
+  keyboardType?: Optional<KeyboardTypeOptions>;
+  value?: Optional<string>;
+  onChangeText: (text: string) => void;
+  onBlur?: Optional<(e: NativeSyntheticEvent<TextInputFocusEventData>) => void>;
+  icon: React.JSX.Element;
+}[];
+
+export type EditableItemRowsProps = {
+  item: Item;
+  onSave: (updated: Partial<Item>) => void;
+  onDelete: () => void;
+  editingId: NullableNumber;
+};
+
+type CalculatedItem = {
+  calculatedItem: {
+    selectedCurrency: Currency;
+    setSelectedCurrency: SetState<Currency>;
+    totalWeight: string;
+    totalPrice: string;
+    realPrice: string;
+    profit: string;
+    profitAbs: string;
+  };
+};
+
+export type ItemPickedCurrencyWithRateProps = CalculatedItem & {
+  metalType: MetalType;
+  rates: Record<string, CurrencyRates> | null;
+};
+
+export type ItemCurrencyPickerProps = CalculatedItem;
+
+export type ItemAddMenuProps = CalculatedItem &
+  AnimatedStyle & {
+    addItemModal: ModalProps;
+    editingId: NullableNumber;
+    metalType: MetalType;
+  };
+
+export type ItemAddButtonProps = {
+  addItemModal: ModalProps;
+};
+
+export type ItemMenuResultValuesDataProps = CalculatedItem & {
+  metalType: MetalType;
+};
+
+export type ItemMenuResultValuesData = {
+  title: string;
+  value: string;
+  iconColor: string;
+  iconName: string;
+}[];
+
+export type ItemMenuProfitValueProps = CalculatedItem;
+
+export type ResultIconName =
+  | "keyboard-double-arrow-down"
+  | "keyboard-double-arrow-up"
+  | "block";
+export type ResultIconColor = "crimson" | "lime" | "white";
+
+export type ItemAddInputsFormProps = ItemInputsProps;
+export type EditableItemInputsDataProps = ItemAddInputsProps;
+export type ItemAddFormProps = ItemInputsProps;
+export type ItemMenuResultValuesProps = ItemMenuResultValuesDataProps;
+export type ItemCurrencyHeaderWithAddedItemsProps = ItemsListProps;

@@ -13,6 +13,12 @@ const currencySymbols: string[] = [valueOfEUR, valueOfPLN, valueOfUSD];
 const basesCurrencies: Currency[] = [currencyPLN, currencyUSD, currencyEUR];
 const combinedCurrencies: Currency[] = [currencyUSD, currencyEUR, currencyPLN];
 
+const currenciesForItem: readonly ["EUR", "USD", "PLN"] = [
+  "EUR",
+  "USD",
+  "PLN",
+] as const;
+
 export {
   valueOfPLN,
   currencyPLN,
@@ -23,4 +29,5 @@ export {
   basesCurrencies,
   combinedCurrencies,
   currencySymbols,
+  currenciesForItem,
 };

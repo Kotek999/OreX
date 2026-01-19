@@ -36,7 +36,11 @@ export const ConverterInputWithButton = (
         <ErrorMessage emptyFieldError={props.emptyFieldError} />
       </View>
       <View mt={25} mb={25} alignSelf="center">
-        <SubmitButton title="Przelicz" onPress={props.onPressConvert} />
+        <SubmitButton
+          bg="#10b981"
+          title="Przelicz"
+          onPress={props.onPressConvert}
+        />
       </View>
     </View>
   );

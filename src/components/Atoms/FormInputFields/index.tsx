@@ -28,7 +28,7 @@ export const FormInputFields = (props: FormInputFieldsProps): JSX => {
             inputs={input.inputs}
             setInputs={input.setInputs}
             onChangeText={input.onChangeText}
-            emptyGoldFieldError={input.emptyGoldFieldError as NullableString}
+            emptyGoldFieldError={input.emptyMetalFieldError as NullableString}
           />
           <ErrorMessage
             emptyFieldError={input.emptyFieldError as NullableString}

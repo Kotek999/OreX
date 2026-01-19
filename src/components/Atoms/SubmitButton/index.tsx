@@ -10,10 +10,10 @@ export const SubmitButton = (props: SubmitButtonProps): JSX => {
       w={screenWidth / 2}
       alignSelf="center"
       textAlign="center"
-      bg="#10b981"
+      bg={props.bg}
       textTransform="uppercase"
       fontWeight="700"
-      fontSize={RFValue(12)}
+      fontSize={RFValue(13)}
       color="#f8fafc"
       underlayColor="#6ee7b7"
       shadow="md"
@@ -21,6 +21,7 @@ export const SubmitButton = (props: SubmitButtonProps): JSX => {
       borderless
       rounded={20}
       onPress={props.onPress}
+      disabled={props.disabled}
     >
       {props.title}
     </Button>

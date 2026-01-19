@@ -12,8 +12,8 @@ export const inputsData = (
     inputs: props.inputs,
     setInputs: props.setInputs,
     onChangeText: props.onChangeText,
-    emptyGoldFieldError: props.emptyGoldFieldError,
-    emptyFieldError: props.emptyGoldFieldError,
+    emptyMetalFieldError: props.emptyMetalFieldError,
+    emptyFieldError: props.emptyMetalFieldError,
   },
   {
     inputTitle: "Cena zakupu",
@@ -24,7 +24,7 @@ export const inputsData = (
     inputs: props.inputs,
     setInputs: props.setInputs,
     onChangeText: props.onChangeText,
-    emptyGoldFieldError: props.emptyPriceGoldFieldError,
-    emptyFieldError: props.emptyPriceGoldFieldError,
+    emptyMetalFieldError: props.emptyPriceMetalFieldError,
+    emptyFieldError: props.emptyPriceMetalFieldError,
   },
 ];

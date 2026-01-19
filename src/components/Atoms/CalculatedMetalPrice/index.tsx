@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
-import { Div as View, Button } from "react-native-magnus";
-import { screenWidth } from "../../../helpers/dimensions";
+import { Div as View } from "react-native-magnus";
 import { calculateMetalPrices } from "../../../helpers/functions/calculateMetalPrices";
 import { useInputValidation } from "../../../hooks/useInputValidation";
+import { SubmitButton } from "../SubmitButton";
 import { JSX, CalculatedMetalPriceProps, OnPress } from "../../../types";
 
 export const CalculatedMetalPrice = <
@@ -19,23 +19,12 @@ export const CalculatedMetalPrice = <
   useInputValidation(metalPriceValues);
 
   return (
-    <View mt={-4} alignSelf="center">
-      <Button
-        w={screenWidth / 2}
-        alignSelf="center"
+    <View mt={-4} mb={10} alignSelf="center">
+      <SubmitButton
         bg="#10b981"
-        textTransform="uppercase"
-        fontWeight="700"
-        color="#f8fafc"
-        underlayColor="#6ee7b7"
-        shadow="md"
-        shadowColor="#6ee7b7"
-        borderless
-        rounded={20}
+        title="Przelicz"
         onPress={onPressCalculatePrices}
-      >
-        Przelicz
-      </Button>
+      />
     </View>
   );
 };

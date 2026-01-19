@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Div as View } from "react-native-magnus";
-import { CalculatedMetalPrice } from "../../../components/Atoms/CalculatedMetalPrice";
+import { CalculatedMetalPrice } from "../../Atoms/CalculatedMetalPrice";
 import { FormHeader } from "../../Atoms/FormHeader";
 import { ScrollViewContainer } from "../../Atoms/ScrollViewContainer";
 import { FormInputFields } from "../../Atoms/FormInputFields";
@@ -8,12 +8,13 @@ import { CurrencyPicker } from "../../Atoms/CurrencyPicker";
 import { currencySymbols } from "../../../helpers/data/currencyData";
 import { screenWidth } from "../../../helpers/dimensions";
 import { AnimatedElement } from "../../Atoms/AnimatedElement";
-import { JSX, NullableString, FormContentProps } from "../../../types";
+import { SubmitButton } from "../../Atoms/SubmitButton";
+import { JSX, NullableString, MetalScreenProps } from "../../../types";
 
-export const FormContent = (props: FormContentProps): JSX => {
-  const [emptyGoldFieldError, setEmptyGoldFieldError] =
+export const RenderMetalScreen = (props: MetalScreenProps): JSX => {
+  const [emptyMetalFieldError, setEmptyMetalFieldError] =
     useState<NullableString>(null);
-  const [emptyPriceGoldFieldError, setEmptyPriceGoldFieldError] =
+  const [emptyPriceMetalFieldError, setEmptyPriceMetalFieldError] =
     useState<NullableString>(null);
 
   return (
@@ -31,8 +32,8 @@ export const FormContent = (props: FormContentProps): JSX => {
           <FormInputFields
             valueOne={props.inputs.inputOne}
             valueTwo={props.inputs.inputTwo}
-            emptyGoldFieldError={emptyGoldFieldError}
-            emptyPriceGoldFieldError={emptyPriceGoldFieldError}
+            emptyMetalFieldError={emptyMetalFieldError}
+            emptyPriceMetalFieldError={emptyPriceMetalFieldError}
             {...props}
           />
         </AnimatedElement>
@@ -41,10 +42,15 @@ export const FormContent = (props: FormContentProps): JSX => {
           <CalculatedMetalPrice
             currencies={currencySymbols}
             setErrorMessages={{
-              setEmptyFieldError: setEmptyGoldFieldError,
-              setEmptyPriceFieldError: setEmptyPriceGoldFieldError,
+              setEmptyFieldError: setEmptyMetalFieldError,
+              setEmptyPriceFieldError: setEmptyPriceMetalFieldError,
             }}
             {...props}
+          />
+          <SubmitButton
+            bg="#10b981"
+            title="Arkusz"
+            onPress={() => props.sheetModal.onPressOpenModal()}
           />
         </AnimatedElement>
       </ScrollViewContainer>

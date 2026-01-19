@@ -1,16 +1,17 @@
 import React from "react";
 import { BottomModal } from "../../../Molecules/BottomModal";
-import { FormContent } from "../../../Molecules/FormContent";
+import { FormContentScreens } from "../../FormContentScreens";
 import { RenderMetalPriceScreen } from "../../RenderMetalPriceScreen";
 import { JSX, MetalsPriceProps } from "../../../../types";
 
 export const MetalsPrice = (props: MetalsPriceProps): JSX => {
   return (
     <>
-      <FormContent
+      <FormContentScreens
         {...props}
         formModal={props.formModal}
         metalModal={props.metalModal}
+        metalType={props.metalType}
       />
       <BottomModal
         ref={props.metalModal.bottomSheetModalRef}

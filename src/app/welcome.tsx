@@ -41,6 +41,7 @@ export default function Welcome(): JSX {
       <View position="absolute" alignSelf="center" bottom={45}>
         <AnimatedElement as="View" animation="slideUp" duration={1500}>
           <SubmitButton
+            bg="#10b981"
             title="Zacznij przeliczać!"
             onPress={onPressNavigateToHomeScreen}
           />
