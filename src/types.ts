@@ -200,7 +200,7 @@ export type ConvertCurrencyProps = {
 export type ChangeInputStateProps = (
   name: keyof InputsType,
   text: string,
-  setInputs: SetState<InputsType>
+  setInputs: SetState<InputsType>,
 ) => void;
 
 export type TextInputOptionsProps = Partial<{
@@ -213,7 +213,7 @@ export type TextInputOptionsProps = Partial<{
 
 export type ChangeTextInputProps = (
   text: string,
-  options?: TextInputOptionsProps
+  options?: TextInputOptionsProps,
 ) => void;
 
 export type CalculateProfitOrLossProps = SelectedCurrencyProps & {
@@ -506,7 +506,7 @@ export type PaginationItemProps = {
 
 export type InputStateActionProp = (
   name: keyof InputsType,
-  text: string
+  text: string,
 ) => void;
 
 export type SliderProps = {
@@ -977,7 +977,7 @@ export type AnimationConfig = {
     opacity: any,
     translateY: any,
     scale: any,
-    duration: number
+    duration: number,
   ) => void;
 };
 
@@ -985,6 +985,7 @@ export type Item = {
   uniqueKey: number;
   id: number;
   name: string;
+  amount: string;
   weight: string;
   price: string;
 };
@@ -1037,8 +1038,10 @@ export type CalculatedItemValuesProps = {
   metalType: MetalType;
 };
 
+export type ItemFieldValuesProp = "amount" | "weight" | "price";
+
 export type ChangeNumericProps = {
-  field: "weight" | "price";
+  field: ItemFieldValuesProp;
   text: string;
   changeText: (field: string, value: string) => void;
 };
@@ -1060,11 +1063,13 @@ export type ItemRow<T> = {
 
 export type ItemAddInputsProps = {
   name?: Optional<string>;
+  amount?: Optional<string>;
   weight?: Optional<string>;
   price?: Optional<string>;
   changeText: (field: string, value: string) => void;
-  changeNumericAction: (field: "weight" | "price", text: string) => void;
+  changeNumericAction: (field: ItemFieldValuesProp, text: string) => void;
   formatOnBlur: (value: string) => string;
+  setAmount: (value: SetStateAction<string>) => void;
   setWeight: (value: SetStateAction<string>) => void;
   setPrice: (value: SetStateAction<string>) => void;
 };
@@ -1075,7 +1080,7 @@ export type ItemAddInputsData = (props: ItemAddInputsProps) => {
   placeholder: string;
   keyboardType?: Optional<KeyboardTypeOptions>;
   value?: Optional<string>;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
   onBlur?: Optional<(e: NativeSyntheticEvent<TextInputFocusEventData>) => void>;
   icon: React.JSX.Element;
 }[];

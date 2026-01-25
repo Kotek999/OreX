@@ -1,6 +1,6 @@
 export const formatNumberDisplay = (
   value: string,
-  options?: { decimals?: number }
+  options?: { decimals?: number },
 ) => {
   if (!value) return "";
 

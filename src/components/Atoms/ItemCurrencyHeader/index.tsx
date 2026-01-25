@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     shadowColor: "white",
   },
   value: {
-    fontSize: RFValue(12.5),
+    fontSize: RFValue(11),
     color: "#7dd3fc",
     letterSpacing: 0.5,
     textTransform: "uppercase",

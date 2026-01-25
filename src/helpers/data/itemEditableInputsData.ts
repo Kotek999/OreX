@@ -6,6 +6,10 @@ export const itemEditableInputsData = (props: EditableItemInputsDataProps) => [
     onChange: (t: string) => props.changeText("name", t),
   },
   {
+    value: props.amount,
+    onChange: (t: string) => props.changeText("amount", t),
+  },
+  {
     value: props.weight,
     onChange: (t: string) => props.changeNumericAction("weight", t),
     onBlur: () => props.setWeight(props.formatOnBlur(props.weight as string)),

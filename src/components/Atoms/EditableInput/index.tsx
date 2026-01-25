@@ -4,13 +4,13 @@ import { screenHeight } from "../../../helpers/dimensions";
 import { EditableInputProps, JSX } from "../../../types";
 
 export const EditableInput = memo((props: EditableInputProps): JSX => {
-  const minWidth: number = 80;
-  const maxWidth: number = 160;
-  const charWidth: number = 10;
+  const minWidth: number = 60;
+  const maxWidth: number = 90;
+  const charWidth: number = 13;
 
   const inputWidth: number = Math.min(
     maxWidth,
-    Math.max(minWidth, (props.value?.length || 0) * charWidth + 40)
+    Math.max(minWidth, (props.value?.length || 0) * charWidth),
   );
   return (
     <View style={{ width: inputWidth, flexDirection: "row" }}>

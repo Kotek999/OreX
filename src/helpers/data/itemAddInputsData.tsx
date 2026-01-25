@@ -3,7 +3,7 @@ import { Icon } from "react-native-magnus";
 import { ItemAddInputsData, ItemAddInputsProps } from "../../types";
 
 export const itemAddInputsData: ItemAddInputsData = (
-  props: ItemAddInputsProps
+  props: ItemAddInputsProps,
 ) => [
   {
     flex: 0.5,
@@ -13,6 +13,21 @@ export const itemAddInputsData: ItemAddInputsData = (
     value: props.name,
     onChangeText: (text: string) => props.changeText("name", text),
     icon: <Icon name="pencil" fontFamily="Entypo" color="gray700" />,
+  },
+  {
+    flex: 0.5,
+    fieldName: "Ilość",
+    placeholder: "0.00",
+    keyboardType: "decimal-pad",
+    value: props.amount,
+    onChangeText: (text: string) => props.changeNumericAction("amount", text),
+    icon: (
+      <Icon
+        name="sort-numeric-ascending-variant"
+        fontFamily="MaterialCommunityIcons"
+        color="gray700"
+      />
+    ),
   },
   {
     flex: 0.5,
@@ -27,7 +42,7 @@ export const itemAddInputsData: ItemAddInputsData = (
     ),
   },
   {
-    flex: 2,
+    flex: 2.5,
     fieldName: "Cena",
     placeholder: "0.00",
     keyboardType: "decimal-pad",

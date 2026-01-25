@@ -9,11 +9,13 @@ import { JSX, EditableItemRowsProps } from "../../../types";
 export const EditableItemRows = (props: EditableItemRowsProps): JSX => {
   const {
     name,
+    amount,
     weight,
     price,
     changeText,
     changeNumericAction,
     formatOnBlur,
+    setAmount,
     setWeight,
     setPrice,
     isValid,
@@ -22,17 +24,20 @@ export const EditableItemRows = (props: EditableItemRowsProps): JSX => {
   const onPressSaveEditedItem = (): void =>
     props.onSave({
       name: name.trim(),
+      amount: amount.trim(),
       weight: weight.trim(),
       price: price.trim(),
     });
 
   const editableInputs = itemEditableInputsData({
     name: name,
+    amount: amount,
     weight: weight,
     price: price,
     changeText: changeText,
     changeNumericAction: changeNumericAction,
     formatOnBlur: formatOnBlur,
+    setAmount: setAmount,
     setWeight: setWeight,
     setPrice: setPrice,
   });
@@ -49,7 +54,7 @@ export const EditableItemRows = (props: EditableItemRowsProps): JSX => {
           <EditableInput
             key={i}
             value={input.value as string}
-            onChange={input.onChange}
+            onChange={input.onChange as (t: string) => void}
             onBlur={input.onBlur}
           />
         ))}

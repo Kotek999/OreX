@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 5,
     color: "#fafafa",
-    fontSize: RFValue(11.5),
+    fontSize: RFValue(11),
     fontWeight: "500",
     textAlign: "center",
   },

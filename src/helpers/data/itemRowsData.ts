@@ -3,19 +3,25 @@ import { ItemRow, Item } from "../../types";
 
 export const itemRowsData: ItemRow<Item>[] = [
   {
-    flex: 1,
+    flex: 0.8,
     name: "Lp.",
     textAlign: "left",
     render: (item) => `#${item.id}`,
   },
   {
-    flex: 1.6,
+    flex: 1,
     name: "Nazwa",
     textAlign: "center",
     render: (item) => item.name,
   },
   {
-    flex: 1.4,
+    flex: 1.2,
+    name: "Ilość",
+    textAlign: "center",
+    render: (item) => `${item.amount}x`,
+  },
+  {
+    flex: 1,
     name: "Waga",
     textAlign: "center",
     render: (item) => formatNumberDisplay(item.weight),

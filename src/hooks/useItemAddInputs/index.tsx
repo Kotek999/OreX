@@ -5,11 +5,13 @@ import { Item, ItemAddInputsFormProps } from "../../types";
 export const useItemAddInputs = (props: ItemAddInputsFormProps) => {
   const {
     name,
+    amount,
     weight,
     price,
     changeText,
     changeNumericAction,
     formatOnBlur,
+    setAmount,
     setPrice,
     setWeight,
     isValid,
@@ -23,6 +25,7 @@ export const useItemAddInputs = (props: ItemAddInputsFormProps) => {
       uniqueKey: Date.now(),
       id: props.items.length + 1,
       name: name.trim(),
+      amount: amount.trim(),
       weight: weight.trim(),
       price: price.trim(),
     };
@@ -34,11 +37,13 @@ export const useItemAddInputs = (props: ItemAddInputsFormProps) => {
 
   const itemAddInputs = itemAddInputsData({
     name: name,
+    amount: amount,
     weight: weight,
     price: price,
     changeText: changeText,
     changeNumericAction: changeNumericAction,
     formatOnBlur: formatOnBlur,
+    setAmount: setAmount,
     setWeight: setWeight,
     setPrice: setPrice,
   });

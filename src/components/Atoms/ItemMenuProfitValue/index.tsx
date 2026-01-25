@@ -20,8 +20,8 @@ export const ItemMenuProfitValue = (props: ItemMenuProfitValueProps): JSX => {
     profitNum < 0
       ? "keyboard-double-arrow-down"
       : profitNum > 0
-      ? "keyboard-double-arrow-up"
-      : "block";
+        ? "keyboard-double-arrow-up"
+        : "block";
   const iconColor: ResultIconColor =
     profitNum < 0 ? "crimson" : profitNum > 0 ? "lime" : "white";
 
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   profitValue: {
     marginLeft: 5,
     color: "white",
-    fontSize: RFValue(15),
+    fontSize: RFValue(12),
     letterSpacing: 0.6,
     fontWeight: "bold",
   },
